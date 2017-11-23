@@ -1,0 +1,32 @@
+.navbar-title {
+	 text-align: center;
+}
+
+.cart-item-product-cover {
+	width: 64px;
+	height: 64px;
+}
+
+.list-group-item {
+	width: 100%;
+}
+
+.cart-item-product-tool {
+	text-align: right;
+}
+
+.cart-item-product-quantity {
+	margin-right: 10px;
+	height: 25px;
+	width: 30px;
+}
+
+#add-to-order-button {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 20px;
+	margin-bottom: 70px;
+	z-index: 900;
+}

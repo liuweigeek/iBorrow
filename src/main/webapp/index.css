@@ -1,0 +1,85 @@
+.zone_badge {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.home-class-zone-title{
+    width: 75%;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-left: 5px;
+    border-radius: 3px 0 0 3px;
+    color: white;
+    background: -webkit-linear-gradient(left, #43C4FB, white); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #43C4FB, white); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #43C4FB, white); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #43C4FB, white); /* 标准的语法（必须放在最后） */
+    /*-moz-box-shadow: 0px 1px 1px gray;
+	box-shadow: 0px 1px 1px gray;*/
+}
+
+.home-zone-title{
+    width: 75%;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-left: 5px;
+    border-radius: 3px 0 0 3px;
+    color: white;
+    background: -webkit-linear-gradient(left, #5cb85c, white); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #5cb85c, white); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #5cb85c, white); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #5cb85c, white); /* 标准的语法（必须放在最后） */
+    /*-moz-box-shadow: 0px 1px 1px gray;
+	box-shadow: 0px 1px 1px gray;*/
+}
+
+.home-classify-card {
+    border-style: none;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.home-classify-img {
+    /*border-radius: 50%;*/
+    width: 100%;
+    /*height: 70px;*/
+}
+
+.home-classify-text {
+    font-size: 10px;
+}
+
+.home-item-card-block {
+    padding: 10px 0 0 0;
+}
+
+.home-item-card-text {
+    padding-left: 20px;
+}
+
+.home-item-card-action {
+    font-size: 24px;
+}
+
+.home-item-card-img {
+    margin-top: 5px;
+    margin-left: 12px;
+    margin-right: 12px;
+    height: 150px;
+}
+
+.home-item-card-text div {
+    padding-left: 20px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-item-card-action {
+    color: #0275d8;
+}
+
+.product-name-text {
+    padding-left: 10px;
+    padding-right: 10px;
+}

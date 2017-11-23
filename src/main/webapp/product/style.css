@@ -1,0 +1,32 @@
+.container {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin: 0px;
+}
+
+.navbar-fixed-bottom {
+	background: #fff;
+	padding: 0px;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1030;
+	bottom: 0;
+	margin-bottom: 0;
+	border-width: 1px 0 0;
+}
+
+.nav-link-icon {
+	margin: 0px;
+	padding: 0px;
+}
+
+.navbar-fixed-bottom .nav-fill {
+	margin: 0px;
+}
+
+.nav-item-text {
+	margin: 0px;
+	font-size: 8px;
+}
+

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+		
+	<package name="Borrow" namespace="/" extends="struts-default" >
+
+		<interceptors>
+	        <interceptor name="userLoginInter" class="com.zhinang.iborrow.interceptor.UserLoginInterceptor"/>
+	        <interceptor name="adminLoginInter" class="com.zhinang.iborrow.interceptor.AdminLoginInterceptor"/>
+	    </interceptors>
+
+		<global-results>
+            <result name="error">/error.html</result>
+			<result name="login" type="redirectAction">User_requestUserInfo</result>
+			<result name="adminLogin" type="redirectAction">admin</result>
+		</global-results>
+
+        <!--<global-exception-mappings>
+            <exception-mapping result="pagenotfound" exception="java.lang.Exception"/>
+        </global-exception-mappings>-->
+
+		<action name="weixinCore" class="com.zhinang.iborrow.action.WeiXinAction">
+
+		</action>
+		
+		<action name="weixinPayNotify" class="com.zhinang.iborrow.action.WeiXinPayNotifyAction">
+
+		</action>
+		
+		<action name="Payment_*" class="com.zhinang.iborrow.action.PaymentAction" method="{1}">
+			<result name="show_list">/user/payment_list.jsp</result>
+			<result name="list">/admin/main.jsp</result>
+            <result name="success">/success.html</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">showList,buy</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">delete,deleteList,list</param>
+        	</interceptor-ref>
+		</action>
+
+		<action name="CkeditorUpload" class="com.zhinang.iborrow.action.CkeditorUpload">
+			<result name="input">/admin/main.jsp</result>
+		</action>
+		
+		<action name="admin" class="com.zhinang.iborrow.action.AdminAction">
+			<result name="input">/admin/login.jsp</result>
+			<result name="success">/admin/main.jsp</result>
+		</action>
+		
+		<action name="Topic_*" class="com.zhinang.iborrow.action.TopicAction" method="{1}">
+			<result name="success" type="redirectAction">Topic_list</result>
+			<result name="show">/topic/topicDetail.jsp</result>
+			<result name="modify">/topic/topicAdd.jsp</result>
+			<result name="list">/admin/main.jsp</result>
+			<result name="save" type="redirectAction">Topic_list</result>
+			<interceptor-ref name="userLoginInter">
+				<param name="includeMethods">show</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,save,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Navi_*" class="com.zhinang.iborrow.action.NaviAction" method="{1}">
+			<result name="success" type="redirectAction">Navi_list</result>
+			<result name="list">/admin/main.jsp</result>
+			<result name="save" type="redirectAction">Navi_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,save.delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Product_*" class="com.zhinang.iborrow.action.ProductAction" method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="show">/product/productDetail.jsp</result>
+			<result name="add">/product/productAdd.jsp</result>
+			<result name="modify">/product/productAdd.jsp</result>
+			<result name="success" type="redirectAction">Product_list</result>
+			<result name="save" type="redirectAction">Product_list</result>
+			<result name="editIntroduction">/product/editIntroduction.jsp</result>
+			<result name="show_list">/product/productList.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">show,addToCart,addToFavorite,removeFromCart,removeFromFavorite,search</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">save,add,modifylist,addInventory,editIntroduction,saveIntroduction,searchFromUser,delete,deleteList,list</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="ProductType_*" class="com.zhinang.iborrow.action.ProductTypeAction" method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="success" type="redirectAction">ProductType_list</result>
+			<result name="save" type="redirectAction">ProductType_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,listByKeyword,save,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<!--<action name="HomeClassItem_*" class="com.zhinang.iborrow.action.HomeClassItemAction"
+						method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="success" type="redirectAction">HomeClassItem_list</result>
+			<result name="save" type="redirectAction">HomeClassItem_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>-->
+		
+		<action name="HomeClassify_*" class="com.zhinang.iborrow.action.HomeClassifyAction" method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="show">/homeclassify/classifyList.jsp</result>
+			<result name="success" type="redirectAction">HomeClassify_list</result>
+			<result name="save" type="redirectAction">HomeClassify_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">show</param>
+        	</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+
+		<action name="HomeClassZone_*" class="com.zhinang.iborrow.action.HomeClassZoneAction" method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="success" type="redirectAction">HomeClassZone_list</result>
+			<result name="save" type="redirectAction">HomeClassZone_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">save,list,delete,deleteList,listByKeyword</param>
+        	</interceptor-ref>
+		</action>
+		
+		<!--<action name="HomeItem_*" class="com.zhinang.iborrow.action.HomeItemAction"
+						method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="success" type="redirectAction">HomeItem_list</result>
+			<result name="save" type="redirectAction">HomeItem_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>-->
+		
+		<action name="HomeZone_*" class="com.zhinang.iborrow.action.HomeZoneAction"
+						method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="success" type="redirectAction">HomeZone_list</result>
+			<result name="save" type="redirectAction">HomeZone_list</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">save,list,delete,deleteList,listByKeyword</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Comment_*" class="com.zhinang.iborrow.action.CommentAction"
+						method="{1}">
+			<result name="backToDetail" type="redirectAction">Product_show</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+				<param name="includeMethods">save</param>
+			</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Wish_*" class="com.zhinang.iborrow.action.WishAction"
+						method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+				<param name="includeMethods">save</param>
+			</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+				<param name="includeMethods">list,delete,deleteList</param>
+			</interceptor-ref>
+		</action>
+		
+		<action name="Notification_*" class="com.zhinang.iborrow.action.NotificationAction"
+						method="{1}">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">save,list,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Order_*" class="com.zhinang.iborrow.action.OrderAction"
+						method="{1}">
+			<result name="query_order">/order/query_order.jsp</result>
+			<result name="list">/admin/main.jsp</result>
+			<result name="showlist">/order/order_list.jsp</result>
+			<result name="showDetail">/order/order_detail.jsp</result>
+			<result name="print">/order/order_print.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">showList,checkRemainAndValid,queryOrder,addToOrder,userReceived,refund,showDetail</param>
+        	</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,shipping,borrowList,refundList,adminReceived,addToOrderFromAdmin,print,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+
+		<!--<action name="OrderItem_*" class="com.zhinang.iborrow.action.OrderItemAction"
+						method="{1}">
+			<result name="queryOrder">/order/query_order.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>-->
+		
+		<action name="PutHistorty_*" class="com.zhinang.iborrow.action.PutHistoryAction"
+						method="{1}">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">save,list,delete,deleteList</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Region_*" class="com.zhinang.iborrow.action.RegionAction"
+						method="{1}">
+			<!-- <interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,save,delete,deleteList,listByParentId</param>
+        	</interceptor-ref> -->
+		</action>
+
+		<action name="User_*" class="com.zhinang.iborrow.action.UserAction"
+						method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="list">/admin/main.jsp</result>
+			<result name="showIndex">/index.jsp</result>
+			<result name="showFavorite">/favorite.jsp</result>
+			<result name="showCart">/cart.jsp</result>
+			<result name="showBorrowed">/borrowed.jsp</result>
+			<result name="showUserCenter">/user.jsp</result>
+			<result name="showUserInfo">/user/userinfo.jsp</result>
+			<result name="addPhoneSuccess" type="redirectAction">User_showCart</result>
+            <result name="getFullInfo" type="redirectAction">User_requestFullUserInfo</result>
+			<result name="callBack" type="redirectAction">User_showIndex</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">showIndex,showFavorite,showCart,showBorrowed,
+					showUserCenter,showUserInfo,setReferee,needsDeposit,confirmRechargeDeposit,
+					rechargeDeposit,checkDeposit,userIsVip,hasPhoneNum,checkAddToCart,addPhoneAndEmail
+				</param>
+        	</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list,save,delete,deleteList,setAdmin,cancelAdmin</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="UserAddress_*" class="com.zhinang.iborrow.action.UserAddressAction"
+						method="{1}">
+			<result name="list">/user/address_list.jsp</result>
+			<result name="save" type="redirectAction">UserAddress_showList</result>
+			<result name="show_detail">/user/add_address.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+        	    <param name="includeMethods">save,showDetail,delete,showList</param>
+        	</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="VipIntegral_*" class="com.zhinang.iborrow.action.VipIntegralAction"
+						method="{1}">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+	       	    <param name="includeMethods">list</param>
+	       	</interceptor-ref>
+		</action>
+
+		<action name="VipLevel_*" class="com.zhinang.iborrow.action.VipLevelAction"
+						method="{1}">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="VipOrder_*" class="com.zhinang.iborrow.action.VipOrderAction"
+						method="{1}">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="VipCard_*" class="com.zhinang.iborrow.action.VipCardAction"
+						method="{1}">
+			<result name="list">/admin/main.jsp</result>
+			<result name="save" type="redirectAction">VipCard_list</result>
+			<result name="showList">/vip/vipcard_list.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInter">
+				<param name="includeMethods">activate,confirmActivate,showList</param>
+			</interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+		
+		<action name="Voucher_*" class="com.zhinang.iborrow.action.VoucherAction"
+						method="{1}">
+			<result name="success">/success.html</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminLoginInter">
+        	    <param name="includeMethods">list</param>
+        	</interceptor-ref>
+		</action>
+	</package>
+</struts>

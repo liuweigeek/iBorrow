@@ -1,0 +1,7 @@
+homeclassify:
+t_home_class_item --> product_id    move to    t_home_classify_product --> product_id;
+t_home_class_item --> homeclassify_id    move to    t_home_classify_product --> homeclassify_id;
+
+homezone:
+t_home_item --> product_id    move to    t_home_zone_product --> product_id;
+t_home_item --> zone_id    move to    t_home_zone_product --> homezone_id;

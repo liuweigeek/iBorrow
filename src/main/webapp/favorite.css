@@ -1,0 +1,26 @@
+.navbar-title {
+	 text-align: center;
+}
+
+.favorite-item-product-cover {
+	width: 64px;
+	height: 64px;
+}
+
+.list-group-item {
+	width: 100%;
+}
+
+.favorite-item-product-tool {
+	text-align: right;
+}
+
+.favorite-item-product-quantity {
+	margin-right: 10px;
+	height: 25px;
+	width: 30px;
+}
+
+.favorite-tools-item {
+	color: #0275d8;
+}

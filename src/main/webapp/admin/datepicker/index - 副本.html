@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+      <meta charset="UTF-8" />
+      <title>基于bootstrap的jQuery日期范围选择插件 - 素材家园（www.sucaijiayuan.com）</title>
+      <link href="bootstrap.min.css" rel="stylesheet">
+      <link href="font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
+      <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="moment.js"></script>
+      <script type="text/javascript" src="daterangepicker.js"></script>
+   </head>
+   <body>
+
+	   <div id="reportrange" class="btn" style="display: inline-block; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+	      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+	      <span></span> <b class="caret"></b>
+	   </div>
+
+	   <script type="text/javascript">
+	   $(document).ready(function() {
+	      $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+	      $('#reportrange').daterangepicker();
+	   });
+	   </script>
+
+   </body>
+</html>

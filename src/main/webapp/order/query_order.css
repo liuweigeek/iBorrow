@@ -1,0 +1,14 @@
+.product-item-cover {
+	width: 64px;
+	height: 64px;
+}
+
+#add-to-order-button {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	z-index: 900;
+}

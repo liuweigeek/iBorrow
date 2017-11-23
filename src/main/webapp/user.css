@@ -1,0 +1,26 @@
+.headimg-bg {
+	/**  格式，filer: blur(模糊半径)
+	*  模糊半径，取值范围0~Npx，0为无效果
+	*/
+	-webkit-filter: blur(20px);
+	-moz-filter: blur(20px);
+	-o-filter: blur(20px);
+	-ms-filter: blur(20px);
+	filter: blur(20px);
+}
+
+.wx-headimg {
+	position: absolute;
+	border-radius: 50%;
+	background: 50% no-repeat;
+	background-size: cover;
+	margin: auto;
+	top: 45px;
+	left: calc(50% - 75px);
+	height: 150px;
+	width: 150px;
+}
+
+.list-group-text {
+	padding-left: 10px;
+}

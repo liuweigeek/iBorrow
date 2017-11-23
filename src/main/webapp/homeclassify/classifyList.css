@@ -1,0 +1,39 @@
+.home-item-card-block {
+	padding: 10px 0 0 0;
+}
+
+.home-item-card-text {
+	padding-left: 20px;
+}
+
+.home-item-card-action {
+	font-size: 6px;
+}
+
+.home-item-card-img {
+	margin-top: 5px;
+	margin-left: 12px;
+	margin-right: 12px;
+	height: 150px;
+}
+
+.home-item-card-text div {
+	padding-left: 20px;
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.home-item-card-action {
+	color: #0275d8;
+}
+
+.page-link {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.product-name-text {
+	padding-left: 10px;
+	padding-right: 10px;
+}
