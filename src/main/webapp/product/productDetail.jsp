@@ -29,8 +29,9 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.toast.min.js"></script>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mdl-grid-cell.min.css">
+<script src="${pageContext.request.contextPath}/js/go-back.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mdl-grid-cell.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/material-icon.css">
 <!-- <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
@@ -53,7 +54,7 @@
 
 		<!-- 顶部菜单栏 -->
 		<nav class="navbar navbar-light bg-faded">
-			<a class="navbar-brand" href="javascript:history.go(-1)">
+			<a class="navbar-brand" href="javascript:goBack()">
 				<img src="${pageContext.request.contextPath}/images/icon/ic_arrow_back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
 				${product.name }
 			</a>

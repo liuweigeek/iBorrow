@@ -3,7 +3,6 @@ package com.zhinang.iborrow.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import java.util.Date;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,10 +59,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public List<T> find(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(Integer.toString(i), param[i]);
 			}
 		}
 		return q.list();
@@ -71,10 +70,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public List<T> find(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
+
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(Integer.toString(i), param.get(i));
 			}
 		}
 		return q.list();
@@ -82,10 +82,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public List<T> find(String hql, Object[] param, PageBean pageBean) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-			    q.setParameter(i, param[i]);
+			    q.setParameter(Integer.toString(i), param[i]);
 			}
 		}
 		return q.setFirstResult(pageBean.getStart()).setMaxResults(pageBean.getPageSize()).list();
@@ -93,10 +93,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public List<T> find(String hql, List<Object> param, PageBean pageBean) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(Integer.toString(i), param.get(i));
 			}
 		}
 		return q.setFirstResult(pageBean.getStart()).setMaxResults(pageBean.getPageSize()).list();
@@ -129,15 +129,15 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public Long count(String hql) {
-		return  (Long) this.getCurrentSession().createQuery(hql).uniqueResult();
+		return  (Long) this.getCurrentSession().createQuery(convertToJpa(hql)).uniqueResult();
 	}
 
 	@Override
     public Long count(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(Integer.toString(i), param[i]);
 			}
 		}
 		return (Long) q.uniqueResult();
@@ -145,10 +145,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public Long count(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(Integer.toString(i), param.get(i));
 			}
 		}
 		return (Long) q.uniqueResult();
@@ -156,15 +156,15 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public Integer executeHql(String hql) {
-		return this.getCurrentSession().createQuery(hql).executeUpdate();
+		return this.getCurrentSession().createQuery(convertToJpa(hql)).executeUpdate();
 	}
 
 	@Override
     public Integer executeHql(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(Integer.toString(i), param[i]);
 			}
 		}
 		return q.executeUpdate();
@@ -172,10 +172,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public Integer executeHql(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(Integer.toString(i), param.get(i));
 			}
 		}
 		return q.executeUpdate();
@@ -183,7 +183,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
     public void merge(T o) {
-		// TODO Auto-generated method stub
 		this.getCurrentSession().merge(o);
 	}
 
@@ -195,15 +194,44 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
 	public List<T> findTopN(String hql, List<Object> param, int N) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		Query q = this.getCurrentSession().createQuery(convertToJpa(hql));
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(Integer.toString(i), param.get(i));
 			}
 		}
 		q.setFirstResult(0);
 		q.setMaxResults(N);
 		return q.list();
+	}
+
+	private static String convertToJpa(String hql) {
+		String[] strArr = hql.split("[?]");
+		//字符串中间存在占位符
+		if (strArr.length > 1) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < strArr.length; i++) {
+				//如果是最后一段字符串
+				if (i == strArr.length -1) {
+					//字符串尾部存在占位符
+					if (hql.endsWith("?")) {
+						sb.append(strArr[i]).append("?").append(i);
+					} else {
+						sb.append(strArr[i]);
+					}
+				} else {
+					sb.append(strArr[i]).append("?").append(i);
+				}
+			}
+			return sb.toString();
+		} else {
+			//字符串结尾有唯一一个占位符
+			if (hql.endsWith("?")) {
+				return hql + "0";
+			} else {
+				return hql;
+			}
+		}
 	}
 
 }

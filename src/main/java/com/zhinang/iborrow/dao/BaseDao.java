@@ -80,10 +80,7 @@ public interface BaseDao<T> {
 	 * 
 	 * @param hql
 	 * @param param
-	 * @param page
-	 *            查询第几页
-	 * @param rows
-	 *            每页显示几条记录
+	 * @param pageBean
 	 * @return
 	 */
 	public List<T> find(String hql, Object[] param, PageBean pageBean);
@@ -93,8 +90,7 @@ public interface BaseDao<T> {
 	 * 
 	 * @param hql
 	 * @param param
-	 * @param page
-	 * @param rows
+	 * @param pageBean
 	 * @return
 	 */
 	public List<T> find(String hql, List<Object> param, PageBean pageBean);

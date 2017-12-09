@@ -239,6 +239,12 @@
                 alert("请输入整数");
                 return false;
             }
+
+            if (money > 1000) {
+            	alert("单次充值不可大于1000")；
+            	return false;
+            }
+
 			rechargeDeposit(money, "押金充值");
 		}
 	
@@ -277,7 +283,11 @@
 							}
 						);
 					} else {
-						alert('暂时无法购买，请稍后重试');
+					    if (result.errMsg) {
+					        alert(result.errMsg);
+						} else {
+                            alert('暂时无法购买，请稍后重试');
+						}
 					}
 				}
 			);

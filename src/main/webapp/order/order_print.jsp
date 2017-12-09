@@ -1,6 +1,7 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -71,7 +72,9 @@
 					<th scope="row">联系方式</th>
 					<td>${order.user.phone }</td>
 					<th scope="row">创建时间</th>
-					<td>${order.createTime }</td>
+					<td>
+						<fmt:formatDate value="${order.createTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+					</td>
 				</tr>
 				<tr>
 					<th scope="row">收货地址</th>

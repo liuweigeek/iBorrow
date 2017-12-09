@@ -17,6 +17,8 @@
             <script type="text/javascript">
                 $(function () {
                     $("#classifycover").uploadPreview({ Img: "coverPre", Width: 220, Height: 220 });
+					$("#mdl-navigation__link--" + "HomeClassify").addClass('mdl-navigation__link--current');
+					$("#content-header-title").text("首页小分类");
                 });
             </script>
 

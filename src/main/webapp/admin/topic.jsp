@@ -1,7 +1,7 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 	<html>
@@ -39,6 +39,11 @@
                     }
                     $('#admin-search-form').attr('action', 'Topic_list?keyword=' + keyword);
                 }
+
+                $(function () {
+                    $("#mdl-navigation__link--" + "Topic").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("内容稿");
+                });
 
             </script>
 
@@ -82,8 +87,12 @@
 								<div class="td_topic_description">${topic.content }</div>
 							</xmp>
 						</td> --%>
-						<td class="mdl-data-table__cell--non-numeric">${topic.publishTime }</td>
-						<td class="mdl-data-table__cell--non-numeric">${topic.modifyTime }</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${topic.publishTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+						</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${topic.modifyTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+						</td>
 						<td>
 							<button id="td-menu${topic.id }" class="mdl-button mdl-js-button mdl-button--icon">
 								<i class="material-icons">more_vert</i>

@@ -84,7 +84,7 @@
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 	<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 		<div class="mdl-layout__header-row">
-			<span class="mdl-layout-title">爱借阅后台管理</span>
+			<span id="content-header-title" class="mdl-layout-title"></span>
 			<div class="mdl-layout-spacer"></div>
 			<form id="admin-search-form" action="#" onsubmit="return searchCheck()" method="post">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
@@ -98,11 +98,11 @@
 					</div>
 				</div>
 			</form>
-			<%--					<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="reservation">
-                                    <li class="mdl-menu__item">关于</li>
-                                    <li class="mdl-menu__item">联系方式</li>
-                                    <li class="mdl-menu__item">服务支持</li>
-                                </ul>--%>
+			<%--<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="reservation">
+				<li class="mdl-menu__item">关于</li>
+				<li class="mdl-menu__item">联系方式</li>
+				<li class="mdl-menu__item">服务支持</li>
+			</ul>--%>
 		</div>
 	</header>
 	<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
@@ -123,23 +123,23 @@
 			</div>
 		</header>
 		<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-			<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>管理主页</a>
-			<a class="mdl-navigation__link" href="Navi_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">wallpaper</i>轮播图</a>
-			<a class="mdl-navigation__link" href="Topic_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">chrome_reader_mode</i>内容稿</a>
-			<a class="mdl-navigation__link" href="HomeClassZone_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">label</i>首页大分类</a>
-			<a class="mdl-navigation__link" href="HomeClassify_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">bookmark</i>首页小分类</a>
+			<a id="mdl-navigation__link--Home" class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>管理主页</a>
+			<a id="mdl-navigation__link--Navi" class="mdl-navigation__link" href="Navi_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">wallpaper</i>轮播图</a>
+			<a id="mdl-navigation__link--Topic" class="mdl-navigation__link" href="Topic_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">chrome_reader_mode</i>内容稿</a>
+			<a id="mdl-navigation__link--HomeClassZone" class="mdl-navigation__link" href="HomeClassZone_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">label</i>首页大分类</a>
+			<a id="mdl-navigation__link--HomeClassify" class="mdl-navigation__link" href="HomeClassify_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">bookmark</i>首页小分类</a>
 			<%--<a class="mdl-navigation__link" href="HomeClassItem_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">book</i>小分类书籍</a>--%>
-			<a class="mdl-navigation__link" href="HomeZone_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">bookmark_border</i>首页推荐分类</a>
+			<a id="mdl-navigation__link--HomeZone" class="mdl-navigation__link" href="HomeZone_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">bookmark_border</i>首页推荐分类</a>
 			<%--<a class="mdl-navigation__link" href="HomeItem_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">collections_bookmark</i>首页推荐书籍</a>--%>
 			<%--<a class="mdl-navigation__link" href="ProductType_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">label_outline</i>书籍分类</a>--%>
-			<a class="mdl-navigation__link" href="Product_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">library_books</i>书籍</a>
-			<a class="mdl-navigation__link" href="Payment_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>交易记录</a>
-			<a class="mdl-navigation__link" href="Order_borrowList"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i>借阅订单</a>
-			<a class="mdl-navigation__link" href="Order_refundList"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_return</i>归还订单</a>
-			<a class="mdl-navigation__link" href="VipCard_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">credit_card</i>会员卡</a>
-			<a class="mdl-navigation__link" href="Wish_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">star</i>心愿书单</a>
+			<a id="mdl-navigation__link--Product" class="mdl-navigation__link" href="Product_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">library_books</i>书籍</a>
+			<a id="mdl-navigation__link--Payment" class="mdl-navigation__link" href="Payment_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>交易记录</a>
+			<a id="mdl-navigation__link--Borrow_Order" class="mdl-navigation__link" href="Order_borrowList"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i>借阅订单</a>
+			<a id="mdl-navigation__link--Refund_Order" class="mdl-navigation__link" href="Order_refundList"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_return</i>归还订单</a>
+			<a id="mdl-navigation__link--VipCard" class="mdl-navigation__link" href="VipCard_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">credit_card</i>会员卡</a>
+			<a id="mdl-navigation__link--Wish" class="mdl-navigation__link" href="Wish_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">star</i>心愿书单</a>
 			<%--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">input</i>书籍入库记录</a>--%>
-			<a class="mdl-navigation__link" href="User_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>用户</a>
+			<a id="mdl-navigation__link--User" class="mdl-navigation__link" href="User_list"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>用户</a>
 			<%--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>用户借阅车</a>--%>
 			<%--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">reorder</i>用户订单</a>--%>
 			<%--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">message</i>用户通知</a>--%>

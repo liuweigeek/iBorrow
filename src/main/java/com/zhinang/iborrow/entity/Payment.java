@@ -1,6 +1,7 @@
 package com.zhinang.iborrow.entity;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 
 //用户收货地址
@@ -31,7 +32,7 @@ public class Payment {
 	// 标价币种
 	private String fee_type;
 	// 标价金额
-	private int total_fee;
+	private BigInteger total_fee;
 	// 终端IP
 	private String spbill_create_ip;
 	// 交易起始时间
@@ -137,11 +138,11 @@ public class Payment {
 		this.fee_type = fee_type;
 	}
 
-	public int getTotal_fee() {
+	public BigInteger getTotal_fee() {
 		return total_fee;
 	}
 
-	public void setTotal_fee(int total_fee) {
+	public void setTotal_fee(BigInteger total_fee) {
 		this.total_fee = total_fee;
 	}
 

@@ -16,7 +16,10 @@
             <script type="text/javascript">
                 $(function () {
                     $("#naviBackground").uploadPreview({ Img: "backgroundPre", Width: 220, Height: 220 });
+                    $("#mdl-navigation__link--" + "Navi").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("轮播图");
                 });
+
             </script>
 
             <style>

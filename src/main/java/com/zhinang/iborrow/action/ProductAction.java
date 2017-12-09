@@ -345,6 +345,9 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		}
 
 		product.setStar(0);
+		if (product.getInventory() == null) {
+			product.setInventory(0);
+		}
 		product.setRemainder(product.getInventory());
 		productService.saveProduct(product);
 		
@@ -381,11 +384,11 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		}
 		return "show";
 	}
-	
+
 	public String addInventory() throws Exception {
 		Product e = productService.findProductById(productId);
-		e.setInventory(e.getInventory() + newInventory);
-		e.setRemainder(e.getRemainder() + newInventory);
+		e.setInventory((e.getInventory() == null ? 0 : e.getInventory()) + newInventory);
+		e.setRemainder((e.getRemainder() == null ? 0 : e.getRemainder()) + newInventory);
 		productService.saveProduct(e);
 
 		PutHistory newPutHistory = new PutHistory();

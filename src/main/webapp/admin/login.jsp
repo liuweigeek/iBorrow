@@ -37,8 +37,7 @@
 		}
 		
 		#login-card {
-			opacity:0.9;
-		
+			opacity: 0.9;		
 		}
 	</style>
 
@@ -55,7 +54,7 @@
 					<div class="form-group">
 						<label class="form-control-label" for="login-card-phone">手机号</label>
 						<input type="tel" class="form-control"
-							id="login-card-phone" placeholder="请输入用户名">
+							id="login-card-phone" placeholder="请输入手机号">
 					</div>
 					<div class="form-group">
 						<label class="form-control-label" for="login-card-password">密码</label>
@@ -63,8 +62,9 @@
 							id="login-card-password" placeholder="请输入密码">
 					</div>
 				</p>
-				<div style="text-align: center; cursor: pointer;">
-					<button type="button" onclick="javascript:login();" class="btn btn-link">登录</button>
+
+				<div style="text-align: center;">
+					<button style="cursor: pointer; text-decoration-line: none;" type="button" onclick="javascript:login();" class="btn btn-link">登录</button>
 				</div>
 			</div>
 		</div>

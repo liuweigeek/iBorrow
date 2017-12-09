@@ -269,6 +269,12 @@
             <groupId>ognl</groupId>
             <artifactId>ognl</artifactId>
             <version>3.0.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
@@ -366,12 +372,6 @@
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
             <version>${org.apache.struts.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-spring-plugin -->
         <dependency>

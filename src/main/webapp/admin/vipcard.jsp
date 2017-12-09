@@ -17,6 +17,8 @@
             <script type="text/javascript">
                 $(function () {
                     $("#vipCardBackground").uploadPreview({ Img: "backgroundPre", Width: 220, Height: 220 });
+					$("#mdl-navigation__link--" + "VipCard").addClass('mdl-navigation__link--current');
+					$("#content-header-title").text("会员卡");
                 });
             </script>
 

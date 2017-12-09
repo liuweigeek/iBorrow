@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -72,11 +73,15 @@
 			</li>
 			<li class="list-group-item justify-content-between">
 				<span class="list-group-text">会员开卡时间</span>
-				<span class="list-group-text">${user.openTime }</span>
+				<span class="list-group-text">
+					<fmt:formatDate value="${user.openTime }" pattern="yyyy年MM月dd日"/>
+				</span>
 			</li>
 			<li class="list-group-item justify-content-between">
 				<span class="list-group-text">会员到期时间</span>
-				<span class="list-group-text">${user.expirationTime }</span>
+				<span class="list-group-text">
+					<fmt:formatDate value="${user.expirationTime }" pattern="yyyy年MM月dd日"/>
+				</span>
 			</li>
 			<li class="list-group-item justify-content-between">
 				<span class="list-group-text">会员号</span>

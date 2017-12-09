@@ -48,6 +48,11 @@
                   $('#admin-search-form').attr('action', 'Product_list?keyword=' + keyword);
               }
 
+              $(function () {
+                  $("#mdl-navigation__link--" + "Product").addClass('mdl-navigation__link--current');
+                  $("#content-header-title").text("书籍");
+              });
+
           </script>
 
         <%

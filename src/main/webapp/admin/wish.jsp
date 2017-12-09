@@ -22,6 +22,11 @@
                     $('#admin-search-form').attr('action', 'Wish_list?keyword=' + keyword);
                 }
 
+                $(function () {
+                    $("#mdl-navigation__link--" + "Wish").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("心愿书单");
+                });
+
             </script>
 
             <%

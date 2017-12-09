@@ -19,6 +19,7 @@ import com.zhinang.iborrow.util.WeixinPayUtil;
 
 import net.sf.json.JSONObject;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -220,13 +221,24 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
 	public String buy() throws Exception {
 		User currentUser = UserUtil.getUserFromSession(request);
 
+		JSONObject result = new JSONObject();
+
 		boolean isSuccess = false;
-		
+
+		if (payType == Constant.PayType.DEPOSIT) {
+			if (money > 1000) {
+				result.put("success", false);
+				result.put("errMsg", "请先绑定手机号");
+				ResponseUtil.write(ServletActionContext.getResponse(), result);
+				return null;
+			}
+		}
+
 		String nonceStr = WeixinPayUtil.getRandomStr();
 		String outTradeNo = WeixinPayUtil.getRandomStr();
 
 		payment.setFinish(false);
-		payment.setTotal_fee((int)(money * 100));
+		payment.setTotal_fee(BigInteger.valueOf((long)(money * 100)));
 		payment.setNonce_str(nonceStr);
 		payment.setSpbill_create_ip(ServletActionContext.getRequest().getRemoteAddr());
 		payment.setOut_trade_no(outTradeNo);
@@ -245,6 +257,11 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
                 attachJson.put("payType", Constant.PayType.DEPOSIT);
                 attachJson.put("money", money);
                 break;
+            default:
+				result.put("success", false);
+				result.put("errMsg", "支付类型错误，请稍后重试");
+				ResponseUtil.write(ServletActionContext.getResponse(), result);
+				return null;
         }
         payment.setAttach(attachJson.toString());
 		
@@ -279,8 +296,7 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
 
 		WeixinPayData weixinPayData = new WeixinPayData(timeStamp, nonceStr,
 				WeixinPayUtil.sign(map, Constant.weixin.WX_PAY_API_KEY));
-		
-		JSONObject result = new JSONObject();
+
 		result.put("success", isSuccess);
 		result.put("out_trade_no", payment.getOut_trade_no());
 		result.put("appId", Constant.weixin.APPID);

@@ -4,13 +4,21 @@ import java.security.MessageDigest;
 
 public class MD5Util {
 
-	public static String MD5Encoder(String s, String charset) {
+	public static void main(String[] args) {
+		System.out.println(encoder("TYczjykj2017"));
+	}
+
+	public static String encoder(String s) {
+		return encoder(s, "UTF-8");
+	}
+
+	public static String encoder(String s, String charset) {
 		try {
 			byte[] btInput = s.getBytes(charset);
 			MessageDigest mdInst = MessageDigest.getInstance("MD5");
 			mdInst.update(btInput);
 			byte[] md = mdInst.digest();
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < md.length; i++) {
 				int val = ((int) md[i]) & 0xff;
 				if (val < 16) {

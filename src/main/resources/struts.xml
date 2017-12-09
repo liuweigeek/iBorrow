@@ -5,6 +5,7 @@
 
 <struts>
 	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="10485760"/>
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
 		
 	<package name="Borrow" namespace="/" extends="struts-default" >
@@ -205,7 +206,7 @@
 			<result name="print">/order/order_print.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<interceptor-ref name="userLoginInter">
-        	    <param name="includeMethods">showList,checkRemainAndValid,queryOrder,addToOrder,userReceived,refund,showDetail</param>
+        	    <param name="includeMethods">showlist,checkRemainAndValid,queryOrder,addToOrder,userReceived,refund,showDetail</param>
         	</interceptor-ref>
 			<interceptor-ref name="adminLoginInter">
         	    <param name="includeMethods">list,shipping,borrowList,refundList,adminReceived,addToOrderFromAdmin,print,delete,deleteList</param>

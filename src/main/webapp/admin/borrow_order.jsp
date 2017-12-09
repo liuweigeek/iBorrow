@@ -1,7 +1,8 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 	<html>
@@ -36,6 +37,11 @@
                     }
                     $('#admin-search-form').attr('action', action + keyword);
                 }
+
+				$(function () {
+					$("#mdl-navigation__link--" + "Borrow_Order").addClass('mdl-navigation__link--current');
+					$("#content-header-title").text("借阅订单");
+				});
 
             </script>
 
@@ -81,7 +87,9 @@
                             <img class="user-headimg-mini" src="${order.user.headimgurl}" alt="${order.user.nickname}">
                             ${order.user.nickname }(${order.userAddress.consignee })
                         </td>
-						<td class="mdl-data-table__cell--non-numeric">${order.createTime }</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${order.createTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+						</td>
 						<td class="mdl-data-table__cell--non-numeric">
 							${fn:length(order.orderItems) }
 							<button id="td-menu-count-${order.id }" class="mdl-button mdl-js-button mdl-button--icon">

@@ -42,6 +42,11 @@
                     $('#admin-search-form').attr('action', 'HomeClassZone_list?keyword=' + keyword);
                 }
 
+                $(function () {
+                    $("#mdl-navigation__link--" + "HomeClassZone").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("首页大分类");
+                });
+
             </script>
 
 		<%

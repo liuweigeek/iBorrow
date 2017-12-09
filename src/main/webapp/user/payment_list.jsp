@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -77,7 +78,9 @@
 				<div id="list-group-item-${payment.id }" class="list-group-item list-group-item-action flex-column align-items-start">
 				
 					<div class="d-flex w-100 justify-content-between">
-						<h6 class="mb-1">${payment.time_start }</h6>
+						<h6 class="mb-1">
+							<fmt:formatDate value="${payment.time_start }" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
+						</h6>
 						<small>${payment.body }</small>
 					</div>
 					<p class="mb-1">${payment.transaction_id }</p>

@@ -66,7 +66,7 @@ public class PageUtil {
 		}
 	}
 
-	public static String genPaginationNoParam(String targetUrl, long totalNum, int currentPage, int pageSize) {
+	public static String getPaginationNoParam(String targetUrl, long totalNum, int currentPage, int pageSize) {
 		long totalPage = totalNum % pageSize == 0 ? totalNum / pageSize : totalNum / pageSize + 1;
 		if (totalPage == 0) {
 			return "未查询到数据";

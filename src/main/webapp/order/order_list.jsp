@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -67,7 +68,9 @@
 				<div id="list-group-item-${order.id }" onclick="javascript:window.location.href='Order_showDetail?orderId=${order.id }'"
 					class="list-group-item list-group-item-action flex-column align-items-start">
 					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">${order.createTime }</h5>
+						<h5 class="mb-1">
+							<fmt:formatDate value="${order.createTime }" pattern="yyyy年MM月dd日"/>
+						</h5>
 						<small>
 							<c:choose>
 								<c:when test="${order.orderType==301 }">

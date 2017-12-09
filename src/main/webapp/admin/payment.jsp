@@ -1,6 +1,7 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 	<html>
@@ -50,6 +51,11 @@
                     $('#admin-search-form').attr('action', action + keyword);
                 }
 
+                $(function () {
+                    $("#mdl-navigation__link--" + "Payment").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("交易记录");
+                });
+
             </script>
 
             <%
@@ -86,8 +92,12 @@
 						</td>
 						<td class="mdl-data-table__cell--non-numeric">${payment.body }</td>
 						<td class="mdl-data-table__cell--non-numeric">${payment.total_fee/100 }元</td>
-						<td class="mdl-data-table__cell--non-numeric">${payment.time_start }</td>
-						<td class="mdl-data-table__cell--non-numeric">${payment.time_expire }</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${payment.time_start }" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
+						</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${payment.time_expire }" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
+						</td>
 						<td class="mdl-data-table__cell--non-numeric">
 							<c:choose>
 								<c:when test="${payment.finish }">

@@ -7,6 +7,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.zhinang.iborrow.constant.Constant;
+import com.zhinang.iborrow.util.StringUtil;
+import org.apache.struts2.StrutsStatics;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserLoginInterceptor extends MethodFilterInterceptor {
 
@@ -19,8 +24,8 @@ public class UserLoginInterceptor extends MethodFilterInterceptor {
 	protected String doIntercept(ActionInvocation invocation) throws Exception {
 		
 		ActionContext ctx = invocation.getInvocationContext();
-		Map<String, Object> session = ctx.getSession();
-		if (session.containsKey(Constant.key_value.CURRENT_USER)) {
+		Map<String, Object> sessionMap = ctx.getSession();
+		if (sessionMap.containsKey(Constant.key_value.CURRENT_USER)) {
 			return invocation.invoke();
 		}
 		
@@ -33,7 +38,13 @@ public class UserLoginInterceptor extends MethodFilterInterceptor {
 				return invocation.invoke();
 			}
 		}*/
-		
+		HttpServletRequest request = (HttpServletRequest) ctx.get(StrutsStatics.HTTP_REQUEST);
+		String fromUrl = request.getRequestURI() + (StringUtil.isNotEmpty(request.getQueryString()) ? "?" + request.getQueryString() : "");
+
+		HttpSession session = request.getSession();
+		session.setAttribute(Constant.key_value.FROM_URL, fromUrl);
+		/*String actionName = invocation.getInvocationContext().getName();
+		Map parameters = invocation.getInvocationContext().getParameters();*/
 		return Action.LOGIN;
 	}
 }

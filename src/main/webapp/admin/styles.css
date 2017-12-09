@@ -104,6 +104,10 @@ html, body {
     background-color: #00BCD4;
     color: #37474F;
 }
+
+.demo-layout .demo-navigation .mdl-navigation__link--current {
+    background-color: #263238;
+}
 .demo-navigation .mdl-navigation__link .material-icons {
     font-size: 24px;
     color: rgba(255, 255, 255, 0.56);

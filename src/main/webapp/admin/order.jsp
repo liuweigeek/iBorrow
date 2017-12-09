@@ -1,7 +1,8 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 	<html>
@@ -53,7 +54,9 @@
 					<tr>
 						<td class="mdl-data-table__cell--non-numeric">${order.id }</td>
 						<td class="mdl-data-table__cell--non-numeric">${order.user.nickname }</td>
-						<td class="mdl-data-table__cell--non-numeric">${order.createTime }</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatDate value="${order.createTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+						</td>
 						<td class="mdl-data-table__cell--non-numeric">
 							${fn:length(order.orderItems) }
 							<button id="td-menu-count-${order.id }" class="mdl-button mdl-js-button mdl-button--icon">

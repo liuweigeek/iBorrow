@@ -1,6 +1,7 @@
 <%@ page import="com.zhinang.iborrow.constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 	<html>
@@ -55,6 +56,11 @@
                     $('#admin-search-form').attr('action', 'User_list?keyword=' + keyword);
                 }
 
+                $(function () {
+                    $("#mdl-navigation__link--" + "User").addClass('mdl-navigation__link--current');
+                    $("#content-header-title").text("用户");
+                });
+
             </script>
 
         </head>
@@ -70,6 +76,7 @@
 					<th class="mdl-data-table__cell--non-numeric">积分</th>
 					<th class="mdl-data-table__cell--non-numeric">已借阅数量</th>
 					<th class="mdl-data-table__cell--non-numeric">注册时间</th>
+                    <th class="mdl-data-table__cell--non-numeric">最后登录时间</th>
 					<th class="mdl-data-table__cell--non-numeric">会员到期时间</th>
                     <th class="mdl-data-table__cell--non-numeric">电子邮箱</th>
                     <th class="mdl-data-table__cell--non-numeric">手机号</th>
@@ -107,8 +114,15 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-						<td class="mdl-data-table__cell--non-numeric">${user.regTime }</td>
-						<td class="mdl-data-table__cell--non-numeric">${user.expirationTime }</td>
+						<td class="mdl-data-table__cell--non-numeric">
+                             <fmt:formatDate value="${user.regTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <fmt:formatDate value="${user.loginTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <fmt:formatDate value="${user.expirationTime }" pattern="yyyy年MM月dd日 HH时mm分"/>
+                        </td>
                         <td class="mdl-data-table__cell--non-numeric">${user.email }</td>
                         <td>${user.phone }</td>
                         <c:choose>

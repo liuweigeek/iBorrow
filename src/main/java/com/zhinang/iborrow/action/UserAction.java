@@ -6,12 +6,7 @@ import com.zhinang.iborrow.constant.Constant;
 import com.zhinang.iborrow.entity.*;
 import com.zhinang.iborrow.service.PaymentService;
 import com.zhinang.iborrow.service.UserService;
-import com.zhinang.iborrow.util.AuthUtil;
-import com.zhinang.iborrow.util.PropertyUtil;
-import com.zhinang.iborrow.util.PageUtil;
-import com.zhinang.iborrow.util.ResponseUtil;
-import com.zhinang.iborrow.util.StringUtil;
-import com.zhinang.iborrow.util.UserUtil;
+import com.zhinang.iborrow.util.*;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -34,6 +29,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.stereotype.Controller;
+import sun.security.provider.MD5;
 
 @Controller
 public class UserAction extends ActionSupport implements ModelDriven<User>, ServletRequestAware, ServletResponseAware {
@@ -46,6 +42,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 	private PaymentService paymentService;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
+
+	private String fromUrl;
 
 	private String mainPage;
 	private int depositNum;
@@ -95,6 +93,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 	
 	public void setPaymentService(PaymentService paymentService) {
 		this.paymentService = paymentService;
+	}
+
+	public String getFromUrl() {
+		return fromUrl;
+	}
+
+	public void setFromUrl(String fromUrl) {
+		this.fromUrl = fromUrl;
 	}
 
 	public String getMainPage() {
@@ -238,6 +244,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 	public void requestUserInfo() throws IOException {
 		String backUrl = Constant.weixin.WX_LOGIN_CALLBACK_URL + "/User_wxCallBack.action";
 
+		HttpSession session = request.getSession();
+		if (session.getAttribute(Constant.key_value.FROM_URL) != null) {
+			backUrl += "?fromUrl=" + session.getAttribute(Constant.key_value.FROM_URL);
+		}
+
 		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
 				+ "appid=" + Constant.weixin.APPID
 				+ "&redirect_uri=" + URLEncoder.encode(backUrl)
@@ -251,6 +262,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 	//获取用户全部信息
     public void requestFullUserInfo() throws IOException {
         String backUrl = Constant.weixin.WX_LOGIN_CALLBACK_URL + "/User_wxFullInfoCallBack.action";
+
+		HttpSession session = request.getSession();
+		if (session.getAttribute(Constant.key_value.FROM_URL) != null) {
+			backUrl += "?fromUrl=" + session.getAttribute(Constant.key_value.FROM_URL);
+		}
 
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
                 + "appid=" + Constant.weixin.APPID
@@ -278,7 +294,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 				return "getFullInfo";
 			} else {
 				if (loginWithSuccess(openid)) {
-					return "callBack";
+					if (StringUtil.isNotEmpty(fromUrl)) {
+						HttpSession session = request.getSession();
+						session.removeAttribute(Constant.key_value.FROM_URL);
+                        response.sendRedirect(request.getScheme()+"://"+ request.getServerName() + fromUrl);
+						return null;
+					} else {
+						return "callBack";
+					}
 				} else {
 					return "getFullInfo";
 				}
@@ -313,7 +336,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 
 			/*request.getRequestDispatcher("User_showIndex").forward(request, response);*/
         }
-        return "callBack";
+		if (StringUtil.isNotEmpty(fromUrl)) {
+			HttpSession session = request.getSession();
+			session.removeAttribute(Constant.key_value.FROM_URL);
+			response.sendRedirect(request.getScheme()+"://"+ request.getServerName() + fromUrl);
+			return null;
+		} else {
+			return "callBack";
+		}
     }
 
     /*public boolean needUpdateUserInfo(String openId) {
@@ -383,7 +413,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
     	if (user.getUpdateTime() == null || user.getUpdateTime().toString().equals("")) {
     		return true;
 		}
-    	return (int)((user.getUpdateTime().getTime() - System.currentTimeMillis())/86400000) > 30;
+    	return (int)((System.currentTimeMillis() - user.getUpdateTime().getTime())/86400000) > 30;
 	}
 
 	//判断VipId是否已存在注册
@@ -696,7 +726,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
 
 	public String adminLogin() throws Exception {
 		user.setPhone(adminPhone);
-		user.setPassword(adminPassword);
+		user.setPassword(MD5Util.encoder(adminPassword));
 		User currentUser = userService.login(user);
 		
 		JSONObject result = new JSONObject();
@@ -723,7 +753,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
         User currentUser = userService.findUserById(userId);
 
         currentUser.setPhone(adminPhone);
-        currentUser.setPassword(adminPassword);
+        currentUser.setPassword(MD5Util.encoder(adminPassword));
         userService.saveUser(currentUser);
         JSONObject result = new JSONObject();
         result.put("success", true);
