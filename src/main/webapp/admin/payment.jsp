@@ -91,7 +91,9 @@
 							${payment.user.nickname }
 						</td>
 						<td class="mdl-data-table__cell--non-numeric">${payment.body }</td>
-						<td class="mdl-data-table__cell--non-numeric">${payment.total_fee/100 }元</td>
+						<td class="mdl-data-table__cell--non-numeric">
+							<fmt:formatNumber type="number" value="${payment.total_fee*(1/100) }" pattern="0.00" maxFractionDigits="2"/>元
+						</td>
 						<td class="mdl-data-table__cell--non-numeric">
 							<fmt:formatDate value="${payment.time_start }" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
 						</td>

@@ -486,9 +486,13 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>, Se
 	public String list() throws Exception {
 
         if (StringUtil.isNotEmpty(keyword)) {
-            User e = new User();
-            e.setNickname(keyword);
-            order.setUser(e);
+			User user = new User();
+			user.setNickname(keyword);
+			order.setUser(user);
+			UserAddress userAddress = new UserAddress();
+			userAddress.setConsignee(keyword);
+			userAddress.setAddress(keyword);
+			order.setUserAddress(userAddress);
         }
 
         if (StringUtil.isNotEmpty(timeranger)) {
@@ -527,9 +531,13 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>, Se
 
 	    order.setOrderType(Constant.OrderType.REFUND);
         if (StringUtil.isNotEmpty(keyword)) {
-            User e = new User();
-            e.setNickname(keyword);
-            order.setUser(e);
+            User user = new User();
+            user.setNickname(keyword);
+            order.setUser(user);
+			UserAddress userAddress = new UserAddress();
+			userAddress.setConsignee(keyword);
+			userAddress.setAddress(keyword);
+			order.setUserAddress(userAddress);
         }
 
         if (StringUtil.isNotEmpty(timeranger)) {
@@ -569,9 +577,13 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>, Se
         order.setOrderType(Constant.OrderType.BORROW);
 
         if (StringUtil.isNotEmpty(keyword)) {
-            User e = new User();
-            e.setNickname(keyword);
-            order.setUser(e);
+            User user = new User();
+            user.setNickname(keyword);
+            order.setUser(user);
+            UserAddress userAddress = new UserAddress();
+            userAddress.setConsignee(keyword);
+            userAddress.setAddress(keyword);
+            order.setUserAddress(userAddress);
         }
 
         if (StringUtil.isNotEmpty(timeranger)) {

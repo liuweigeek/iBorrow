@@ -86,7 +86,9 @@
 					<p class="mb-1">${payment.transaction_id }</p>
 					<div class="d-flex w-100 justify-content-between">
 						<small>
-							<span class="badge badge-warning badge-pill">金额：${payment.total_fee / 100 }元</span>
+							<span class="badge badge-warning badge-pill">
+								金额：<fmt:formatNumber type="number" value="${payment.total_fee*(1/100) }" pattern="0.00" maxFractionDigits="2"/>元
+							</span>
 						</small>
 						<c:choose>
 							<c:when test="${payment.finish}">

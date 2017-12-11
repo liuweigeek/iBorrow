@@ -35,6 +35,12 @@ public class OrderServiceImpl implements OrderService {
 				hql.append(" and user.nickname like ?");
 				param.add("%" + order.getUser().getNickname() + "%");
 			}
+			if (order.getUserAddress() != null) {
+				hql.append(" or userAddress.consignee like ?");
+				param.add("%" + order.getUserAddress().getConsignee() + "%");
+				hql.append(" or userAddress.address like ?");
+				param.add("%" + order.getUserAddress().getAddress() + "%");
+			}
 			if (order.getOrderType() != null) {
 				if (order.getOrderType() == Constant.OrderType.BORROW) {
 					hql.append(" and orderType = ?");
@@ -44,14 +50,6 @@ public class OrderServiceImpl implements OrderService {
 					param.add(order.getOrderType());
 				}
 			}
-            /*if (order.getCreateTime() != null) {
-                hql.append(" and createTime >= ?");
-                param.add(order.getCreateTime());
-            }
-            if (order.getFinishTime() != null) {
-                hql.append(" and createTime <= ?");
-                param.add(order.getFinishTime());
-            }*/
             if (order.getCreateTime() != null && order.getFinishTime() != null) {
 				hql.append(" and createTime between ? and ?");
 				param.add(order.getCreateTime());
@@ -75,6 +73,12 @@ public class OrderServiceImpl implements OrderService {
 				hql.append(" and user.nickname like ?");
 				param.add("%" + order.getUser().getNickname() + "%");
 			}
+			if (order.getUserAddress() != null) {
+				hql.append(" or userAddress.consignee like ?");
+				param.add("%" + order.getUserAddress().getConsignee() + "%");
+				hql.append(" or userAddress.address like ?");
+				param.add("%" + order.getUserAddress().getAddress() + "%");
+			}
 			if (order.getOrderType() != null) {
 				if (order.getOrderType() == Constant.OrderType.BORROW) {
 					hql.append(" and orderType = ?");
@@ -84,14 +88,6 @@ public class OrderServiceImpl implements OrderService {
 					param.add(order.getOrderType());
 				}
 			}
-            /*if (order.getCreateTime() != null) {
-                hql.append(" and createTime >= ?");
-                param.add(order.getCreateTime());
-            }
-            if (order.getFinishTime() != null) {
-                hql.append(" and createTime <= ?");
-                param.add(order.getFinishTime());
-            }*/
 			if (order.getCreateTime() != null && order.getFinishTime() != null) {
 				hql.append(" and createTime between ? and ?");
 				param.add(order.getCreateTime());
