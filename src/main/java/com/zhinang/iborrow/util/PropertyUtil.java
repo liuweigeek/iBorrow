@@ -36,7 +36,6 @@ public class PropertyUtil {
 		try {
 			prop.load(in);
 			result = prop.getProperty(name).trim();
-			/*System.out.println("name:" + result);*/
 		} catch (IOException e) {
 			System.out.println("读取配置文件出错");
 			e.printStackTrace();

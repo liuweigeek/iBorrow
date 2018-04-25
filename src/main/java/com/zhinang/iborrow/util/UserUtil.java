@@ -29,15 +29,13 @@ public class UserUtil {
 	}
 
 	public static User getUserFromSession(HttpServletRequest request) {
-		/*return GetUserAction.getUserFromSession(request);*/
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute(Constant.key_value.CURRENT_USER);
 		return userUtil.userService.findUserById(userId);
 	}
 
     public static User getAdminFromSession(HttpServletRequest request) {
-		/*return GetUserAction.getUserFromSession(request);*/
-        HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
         int userId = (int) session.getAttribute(Constant.key_value.CURRENT_ADMIN);
         return userUtil.userService.findUserById(userId);
     }

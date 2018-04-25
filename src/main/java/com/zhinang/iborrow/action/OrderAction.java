@@ -285,7 +285,6 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>, Se
 		
 		ResponseUtil.write(ServletActionContext.getResponse(), result);
 		return null;
-
 	}
 	
 	//确认订单

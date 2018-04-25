@@ -76,7 +76,7 @@
 					<th class="mdl-data-table__cell--non-numeric">积分</th>
 					<th class="mdl-data-table__cell--non-numeric">已借阅数量</th>
 					<th class="mdl-data-table__cell--non-numeric">注册时间</th>
-                    <th class="mdl-data-table__cell--non-numeric">最后登录时间</th>
+                    <th class="mdl-data-table__cell--non-numeric">最近登录时间</th>
 					<th class="mdl-data-table__cell--non-numeric">会员到期时间</th>
                     <th class="mdl-data-table__cell--non-numeric">电子邮箱</th>
                     <th class="mdl-data-table__cell--non-numeric">手机号</th>
@@ -218,7 +218,6 @@
                     <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--9-col">
                         <input class="mdl-textfield__input" type="text" id="add_to_cart_dialog-keyword">
                         <label class="mdl-textfield__label" for="add_to_cart_dialog-keyword">书名/作者/出版社</label>
-
                         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                             data-mdl-for="add_to_cart_dialog-keyword" id="add_to_cart_dialog-menu"></ul>
                     </div>

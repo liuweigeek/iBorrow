@@ -24,9 +24,6 @@
     <listener>
         <listener-class>com.zhinang.iborrow.action.InitAction</listener-class>
     </listener>
-    <!-- <listener>
-      <listener-class>com.zhinang.iborrow.action.GetUserAction</listener-class>
-    </listener> -->
     <filter>
         <filter-name>openSessionInViewFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>

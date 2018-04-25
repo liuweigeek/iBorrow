@@ -725,10 +725,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Serv
     }
 
 	public String adminLogin() throws Exception {
-		user.setPhone(adminPhone);
+
+    	user.setPhone(adminPhone);
 		user.setPassword(MD5Util.encoder(adminPassword));
 		User currentUser = userService.login(user);
-		
+
 		JSONObject result = new JSONObject();
 		if (currentUser != null) {
 			HttpSession session = request.getSession();

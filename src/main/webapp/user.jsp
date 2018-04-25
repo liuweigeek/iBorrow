@@ -241,7 +241,7 @@
             }
 
             if (money > 1000) {
-            	alert("单次充值不可大于1000")；
+            	alert("单次充值不可大于1000");
             	return false;
             }
 
