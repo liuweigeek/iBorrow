@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="太原才智教育科技有限公司">
+<meta name="description" content="太原科技有限公司">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>${webpagename }</title>
@@ -75,7 +75,7 @@
 				<figcaption class="figure-caption text-right">
 					${vipCard.price }元/${vipCard.day }天
 					<button class="card-link btn btn-link" type="button"
-						onclick="javascript:showAcceptDialog(${vipCard.id }, ${vipCard.price }, '才智教育会员卡', ${vipCard.day});">
+						onclick="javascript:showAcceptDialog(${vipCard.id }, ${vipCard.price }, '会员卡', ${vipCard.day});">
 						购买
 					</button>
 				</figcaption>
@@ -157,7 +157,7 @@
 				<input id="accept-vipcard-body" type="hidden">
                 <input id="accept-vipcard-day" type="hidden">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">才智教育会员注册条款须知</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">会员注册条款须知</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -166,7 +166,7 @@
                     <ul>
                         <li>
                             <h5>一、会员使用须知</h5>
-                            会员应保证其提供给才智教育绘本馆的资料均真实无误，如因用户提供虚假资料或被他人获悉自己的注册资料，从而导致的损失由会员本人承担，损失包括但不限于因资料虚假而无法取回丢失的借阅卡/会员名。
+                            会员应保证其提供给绘本馆的资料均真实无误，如因用户提供虚假资料或被他人获悉自己的注册资料，从而导致的损失由会员本人承担，损失包括但不限于因资料虚假而无法取回丢失的借阅卡/会员名。
                         </li>
                         <li>
                             <h5>二、阅读计划使用须知</h5>
@@ -175,7 +175,7 @@
                                     1.阅读计划的会员费仅指图书借阅使用费。年费：980元/年。
                                 </li>
                                 <li>
-                                    2.请根据宝宝的阅读需求选择合适的阅读计划借阅。如需帮助，请联系才智教育绘本阅读指导老师，我们将免费为您提供个性化阅读指导。
+                                    2.请根据宝宝的阅读需求选择合适的阅读计划借阅。如需帮助，请联系绘本阅读指导老师，我们将免费为您提供个性化阅读指导。
                                 </li>
                                 <li>
                                     3. 全年不限次借阅服务（单次借阅不应超过5本，且上次借阅数量和本次借阅数量合在一起不应超过5本），借阅无时限。绘本馆采取寄书到家，回邮到付（仅限山西省境内），线上下单方式开展。
@@ -195,7 +195,7 @@
                             <h5>三、注意事项</h5>
                             <ul>
                                 <li>
-                                    1.会员在收到图书时，请第一时间核对所借图书订单，检查书籍是否有毁损（如涂画、撕页、写字、污迹等），如有上述情况，请及时联系才智教育工作人员或通过微信平台反馈。
+                                    1.会员在收到图书时，请第一时间核对所借图书订单，检查书籍是否有毁损（如涂画、撕页、写字、污迹等），如有上述情况，请及时联系工作人员或通过微信平台反馈。
                                 </li>
                                 <li>
                                     2.会员若在借阅期内，发生图书毁损、遗失等情况，须按书籍原价的七折购买此书，或买一本相同且全新的书归还。
@@ -207,15 +207,15 @@
                                     4、在阅读结束后，请将绘本包装好，通过本馆指定快递公司寄回或送回。绘本馆根据顾客返回书籍包装情况，为顾客赠送积分。每完成一次牢固包装回邮，计10分；如普通包装不累计积分。换购相应产品或会期。
                                 </li>
                                 <li>
-                                    5.所有绘本馆公告信息（如：新书推荐、送书时间调整、活动安排等）都会在才智教育微信公众号发布，请随时关注信息。
+                                    5.所有绘本馆公告信息（如：新书推荐、送书时间调整、活动安排等）都会在微信公众号发布，请随时关注信息。
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <h5>四、如有其它未尽事宜，请联系才智教育工作人员。</h5><br>
+                            <h5>四、如有其它未尽事宜，请联系工作人员。</h5><br>
                         </li>
                         <li>
-                            <h4>愿您和孩子的阅读之门从此开启！才智教育衷心祝愿您和孩子阅读愉快！ </h4>
+                            <h4>愿您和孩子的阅读之门从此开启！衷心祝愿您和孩子阅读愉快！ </h4>
                         </li>
                     </ul>
 				</div>

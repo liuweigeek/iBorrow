@@ -169,7 +169,7 @@
             </c:forEach>
         </div>
 
-        <img width="100%" src="images/index_com_info.png">
+        <%--<img width="100%" src="images/index_com_info.png">--%>
 
         <a class="carousel-control-prev" href="#carouselIndicators"
            role="button" data-slide="prev"> <span

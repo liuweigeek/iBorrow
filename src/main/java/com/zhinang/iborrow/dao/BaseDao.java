@@ -11,7 +11,6 @@ import com.zhinang.iborrow.entity.PageBean;
 /**
  * 基础数据库操作类
  */
-@Repository("baseDao")
 public interface BaseDao<T> {
 
 	/**
