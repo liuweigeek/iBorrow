@@ -32,3 +32,9 @@ nbdist/
 
 ### Maven ###
 .mvn
+src/main/webapp/images/ck_images/
+src/main/webapp/images/homeClassify_cover/
+src/main/webapp/images/navi/
+src/main/webapp/images/product_cover/
+src/main/webapp/images/vipcard/
+src/test/
