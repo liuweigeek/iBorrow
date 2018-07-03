@@ -32,5 +32,3 @@ nbdist/
 
 ### Maven ###
 .mvn
-
-src/test/
