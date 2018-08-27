@@ -201,6 +201,7 @@
 		function showMsg(msg) {
 			$.toast({
 				text: msg,
+                hideAfter: 1000,
 				position: 'bottom-center',
 				textAlign: 'center',
 				stack: false
