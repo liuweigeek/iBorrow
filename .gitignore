@@ -1,6 +1,7 @@
+### Maven ###
+.mvn
 target/
 out/
-filemanager-deloy.sh
 META-INF/
 
 ### NOT MAVEN PROJECT ###
@@ -30,11 +31,14 @@ nbbuild/
 nbdist/
 .nb-gradle/
 
-### Maven ###
-.mvn
-src/main/webapp/images/ck_images/
-src/main/webapp/images/homeClassify_cover/
-src/main/webapp/images/navi/
-src/main/webapp/images/product_cover/
-src/main/webapp/images/vipcard/
-src/test/
+### VS Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+### macOS ###
+.DS_Store
+Thumbs.db
