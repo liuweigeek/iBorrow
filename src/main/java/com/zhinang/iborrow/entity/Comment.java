@@ -1,6 +1,5 @@
 package com.zhinang.iborrow.entity;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,84 +12,85 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.util.Date;
 
 //产品评论
 @Entity
 @Table(name = "t_comment")
 public class Comment {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	
-	//评论所属用户
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	//指向产品
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_id")
-	private Product product;
-	
-	//评论发出时间
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date time;
-	
-	//评论标题
-	private String title;
-	
-	//评论内容
-	@Lob
-	@Column(columnDefinition = "TEXT")
-	private String content;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    //评论所属用户
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    //指向产品
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-	public User getUser() {
-		return user;
-	}
+    //评论发出时间
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date time;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    //评论标题
+    private String title;
 
-	public Product getProduct() {
-		return product;
-	}
+    //评论内容
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Date getTime() {
-		return time;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setTime(Date time) {
-		this.time = time;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Product getProduct() {
+        return product;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
 }

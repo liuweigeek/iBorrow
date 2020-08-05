@@ -10,100 +10,101 @@ import com.zhinang.iborrow.entity.WeixinPayData;
 import com.zhinang.iborrow.entity.WeixinPrePayData;
 import com.zhinang.iborrow.service.PaymentService;
 import com.zhinang.iborrow.service.UserService;
-import com.zhinang.iborrow.util.PropertyUtil;
 import com.zhinang.iborrow.util.PageUtil;
+import com.zhinang.iborrow.util.PropertyUtil;
 import com.zhinang.iborrow.util.ResponseUtil;
 import com.zhinang.iborrow.util.StringUtil;
 import com.zhinang.iborrow.util.UserUtil;
 import com.zhinang.iborrow.util.WeixinPayUtil;
-
 import net.sf.json.JSONObject;
-
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.stereotype.Controller;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class PaymentAction extends ActionSupport implements ModelDriven<Payment>, ServletRequestAware {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Payment payment = new Payment();
+    private Payment payment = new Payment();
 
-	private Float money;
-	private String bodyStr;
-	private Integer payType;
+    private Float money;
+    private String bodyStr;
+    private Integer payType;
 
-	private int vipCardDay;
+    private int vipCardDay;
 
-	private int currentPage;
-	private int totalPage;
-	private String pageCode;
+    private int currentPage;
+    private int totalPage;
+    private String pageCode;
 
     private String keyword;
     private String timeranger;
 
-	@Resource
-	private UserService userService;
-	@Resource
-	private PaymentService paymentService;
+    @Resource
+    private UserService userService;
+    @Resource
+    private PaymentService paymentService;
 
-	private List<Payment> paymentList = new ArrayList<>();
+    private List<Payment> paymentList = new ArrayList<>();
 
-	private String mainPage;
+    private String mainPage;
 
-	private HttpServletRequest request;
+    private HttpServletRequest request;
 
-	@Override
+    @Override
     public Payment getModel() {
-		return this.payment;
-	}
+        return this.payment;
+    }
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-	public void setPaymentService(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
-	public List<Payment> getPaymentList() {
-		return paymentList;
-	}
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
 
-	public void setPaymentList(List<Payment> paymentList) {
-		this.paymentList = paymentList;
-	}
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
 
-	public String getMainPage() {
-		return mainPage;
-	}
+    public String getMainPage() {
+        return mainPage;
+    }
 
-	public void setMainPage(String mainPage) {
-		this.mainPage = mainPage;
-	}
+    public void setMainPage(String mainPage) {
+        this.mainPage = mainPage;
+    }
 
-	public Float getMoney() {
-		return money;
-	}
+    public Float getMoney() {
+        return money;
+    }
 
-	public void setMoney(Float money) {
-		this.money = money;
-	}
+    public void setMoney(Float money) {
+        this.money = money;
+    }
 
-	public String getBodyStr() {
-		return bodyStr;
-	}
+    public String getBodyStr() {
+        return bodyStr;
+    }
 
-	public void setBodyStr(String bodyStr) {
-		this.bodyStr = bodyStr;
-	}
+    public void setBodyStr(String bodyStr) {
+        this.bodyStr = bodyStr;
+    }
 
     public Integer getPayType() {
         return payType;
@@ -122,28 +123,28 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
     }
 
     public int getCurrentPage() {
-		return currentPage;
-	}
+        return currentPage;
+    }
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 
-	public int getTotalPage() {
-		return totalPage;
-	}
+    public int getTotalPage() {
+        return totalPage;
+    }
 
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
 
-	public String getPageCode() {
-		return pageCode;
-	}
+    public String getPageCode() {
+        return pageCode;
+    }
 
-	public void setPageCode(String pageCode) {
-		this.pageCode = pageCode;
-	}
+    public void setPageCode(String pageCode) {
+        this.pageCode = pageCode;
+    }
 
     public String getKeyword() {
         return keyword;
@@ -162,14 +163,14 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
     }
 
     public String delete() throws Exception {
-		return null;
-	}
+        return null;
+    }
 
-	public String deleteList() throws Exception {
-		return null;
-	}
+    public String deleteList() throws Exception {
+        return null;
+    }
 
-	public String list() throws Exception {
+    public String list() throws Exception {
 
         if (StringUtil.isNotEmpty(keyword)) {
             User e = new User();
@@ -191,61 +192,61 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
             }
         }
 
-		int pageSize = Integer.parseInt(PropertyUtil.getPropertyByName2("constant.properties", "adminpagesize"));
-		if (currentPage == 0) {
-			currentPage = 1;
-		}
-		PageBean pageBean = new PageBean(currentPage, pageSize);
-		long count = paymentService.getPaymentCount(payment);
-		totalPage = (int) (count / pageSize);
-		if ((count % pageSize) > 0) {
-			totalPage++;
-		}
-		String newParams = (StringUtil.isNotEmpty(keyword) ? "&keyword=" + keyword : "")
-                        + (StringUtil.isNotEmpty(timeranger) ? "&timeranger=" + timeranger : "");
-		pageCode = PageUtil.getPagination(request.getContextPath() + "/Payment_list.action", count, currentPage,
-				pageSize, newParams.replaceFirst("&", ""));
-		
-		paymentList = paymentService.findPaymentList(payment, pageBean);
-		mainPage = "payment.jsp";
-		return "list";
-	}
-	
-	public String showList() throws Exception {
-		User currentUser = UserUtil.getUserFromSession(request);
-		paymentList.addAll(currentUser.getPayments());
+        int pageSize = Integer.parseInt(PropertyUtil.getPropertyByName2("constant.properties", "adminpagesize"));
+        if (currentPage == 0) {
+            currentPage = 1;
+        }
+        PageBean pageBean = new PageBean(currentPage, pageSize);
+        long count = paymentService.getPaymentCount(payment);
+        totalPage = (int) (count / pageSize);
+        if ((count % pageSize) > 0) {
+            totalPage++;
+        }
+        String newParams = (StringUtil.isNotEmpty(keyword) ? "&keyword=" + keyword : "")
+                + (StringUtil.isNotEmpty(timeranger) ? "&timeranger=" + timeranger : "");
+        pageCode = PageUtil.getPagination(request.getContextPath() + "/Payment_list.action", count, currentPage,
+                pageSize, newParams.replaceFirst("&", ""));
 
-		return "show_list";
-	}
+        paymentList = paymentService.findPaymentList(payment, pageBean);
+        mainPage = "payment.jsp";
+        return "list";
+    }
 
-	public String buy() throws Exception {
-		User currentUser = UserUtil.getUserFromSession(request);
+    public String showList() throws Exception {
+        User currentUser = UserUtil.getUserFromSession(request);
+        paymentList.addAll(currentUser.getPayments());
 
-		JSONObject result = new JSONObject();
+        return "show_list";
+    }
 
-		boolean isSuccess = false;
+    public String buy() throws Exception {
+        User currentUser = UserUtil.getUserFromSession(request);
 
-		if (payType == Constant.PayType.DEPOSIT) {
-			if (money > 1000) {
-				result.put("success", false);
-				result.put("errMsg", "请先绑定手机号");
-				ResponseUtil.write(ServletActionContext.getResponse(), result);
-				return null;
-			}
-		}
+        JSONObject result = new JSONObject();
 
-		String nonceStr = WeixinPayUtil.getRandomStr();
-		String outTradeNo = WeixinPayUtil.getRandomStr();
+        boolean isSuccess = false;
 
-		payment.setFinish(false);
-		payment.setTotal_fee(BigInteger.valueOf((long)(money * 100)));
-		payment.setNonce_str(nonceStr);
-		payment.setSpbill_create_ip(ServletActionContext.getRequest().getRemoteAddr());
-		payment.setOut_trade_no(outTradeNo);
+        if (payType == Constant.PayType.DEPOSIT) {
+            if (money > 1000) {
+                result.put("success", false);
+                result.put("errMsg", "请先绑定手机号");
+                ResponseUtil.write(ServletActionContext.getResponse(), result);
+                return null;
+            }
+        }
+
+        String nonceStr = WeixinPayUtil.getRandomStr();
+        String outTradeNo = WeixinPayUtil.getRandomStr();
+
+        payment.setFinish(false);
+        payment.setTotal_fee(BigInteger.valueOf((long) (money * 100)));
+        payment.setNonce_str(nonceStr);
+        payment.setSpbill_create_ip(ServletActionContext.getRequest().getRemoteAddr());
+        payment.setOut_trade_no(outTradeNo);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");*/
         Date time_start = new Date();
-		payment.setTime_start(time_start);
-		payment.setBody(bodyStr);
+        payment.setTime_start(time_start);
+        payment.setBody(bodyStr);
 
         JSONObject attachJson = new JSONObject();
         switch (payType) {
@@ -258,58 +259,58 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
                 attachJson.put("money", money);
                 break;
             default:
-				result.put("success", false);
-				result.put("errMsg", "支付类型错误，请稍后重试");
-				ResponseUtil.write(ServletActionContext.getResponse(), result);
-				return null;
+                result.put("success", false);
+                result.put("errMsg", "支付类型错误，请稍后重试");
+                ResponseUtil.write(ServletActionContext.getResponse(), result);
+                return null;
         }
         payment.setAttach(attachJson.toString());
-		
-		payment.setUser(currentUser);
-		paymentService.savePayment(payment);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("appid", Constant.weixin.APPID);
-		map.put("mch_id", Constant.weixin.WX_PAY_MCH_ID);
-		map.put("nonce_str", payment.getNonce_str());
-		map.put("body", payment.getBody());
-		map.put("out_trade_no", payment.getOut_trade_no());
-		map.put("total_fee", payment.getTotal_fee());
-		map.put("spbill_create_ip", payment.getSpbill_create_ip());
-		map.put("notify_url", Constant.weixin.WX_PAY_NOTIFY_URL);
-		map.put("trade_type", "JSAPI");
-		map.put("openid", currentUser.getWx_openid());
+        payment.setUser(currentUser);
+        paymentService.savePayment(payment);
 
-		WeixinPrePayData weixinPrePayData = WeixinPayUtil.sentPost(map, Constant.weixin.WX_PAY_API_KEY);
-		String prepay_id = weixinPrePayData.getPrepay_id();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("appid", Constant.weixin.APPID);
+        map.put("mch_id", Constant.weixin.WX_PAY_MCH_ID);
+        map.put("nonce_str", payment.getNonce_str());
+        map.put("body", payment.getBody());
+        map.put("out_trade_no", payment.getOut_trade_no());
+        map.put("total_fee", payment.getTotal_fee());
+        map.put("spbill_create_ip", payment.getSpbill_create_ip());
+        map.put("notify_url", Constant.weixin.WX_PAY_NOTIFY_URL);
+        map.put("trade_type", "JSAPI");
+        map.put("openid", currentUser.getWx_openid());
 
-		isSuccess = StringUtil.isNotEmpty(prepay_id);
+        WeixinPrePayData weixinPrePayData = WeixinPayUtil.sentPost(map, Constant.weixin.WX_PAY_API_KEY);
+        String prepay_id = weixinPrePayData.getPrepay_id();
 
-		String timeStamp = Long.toString(System.currentTimeMillis());
+        isSuccess = StringUtil.isNotEmpty(prepay_id);
 
-		map = new HashMap<String, Object>();
-		map.put("appId", Constant.weixin.APPID);
-		map.put("timeStamp", timeStamp);
-		map.put("nonceStr", nonceStr);
-		map.put("package", "prepay_id=" + prepay_id);
-		map.put("signType", "MD5");
+        String timeStamp = Long.toString(System.currentTimeMillis());
 
-		WeixinPayData weixinPayData = new WeixinPayData(timeStamp, nonceStr,
-				WeixinPayUtil.sign(map, Constant.weixin.WX_PAY_API_KEY));
+        map = new HashMap<String, Object>();
+        map.put("appId", Constant.weixin.APPID);
+        map.put("timeStamp", timeStamp);
+        map.put("nonceStr", nonceStr);
+        map.put("package", "prepay_id=" + prepay_id);
+        map.put("signType", "MD5");
 
-		result.put("success", isSuccess);
-		result.put("out_trade_no", payment.getOut_trade_no());
-		result.put("appId", Constant.weixin.APPID);
-		result.put("timeStamp", weixinPayData.getTimeStamp());
-		result.put("nonceStr", weixinPayData.getNonceStr());
-		result.put("package", "prepay_id=" + prepay_id);
-		result.put("signType", "MD5");
-		result.put("paySign", weixinPayData.getPaySign());
+        WeixinPayData weixinPayData = new WeixinPayData(timeStamp, nonceStr,
+                WeixinPayUtil.sign(map, Constant.weixin.WX_PAY_API_KEY));
 
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
+        result.put("success", isSuccess);
+        result.put("out_trade_no", payment.getOut_trade_no());
+        result.put("appId", Constant.weixin.APPID);
+        result.put("timeStamp", weixinPayData.getTimeStamp());
+        result.put("nonceStr", weixinPayData.getNonceStr());
+        result.put("package", "prepay_id=" + prepay_id);
+        result.put("signType", "MD5");
+        result.put("paySign", weixinPayData.getPaySign());
 
-		return null;
-	}
+        ResponseUtil.write(ServletActionContext.getResponse(), result);
+
+        return null;
+    }
 
 	/*public String convert() throws Exception {
 	    paymentList = paymentService.findPaymentList(null,  null);
@@ -330,9 +331,9 @@ public class PaymentAction extends ActionSupport implements ModelDriven<Payment>
         }
         return SUCCESS;
     }*/
-	
-	@Override
+
+    @Override
     public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
+        this.request = request;
+    }
 }

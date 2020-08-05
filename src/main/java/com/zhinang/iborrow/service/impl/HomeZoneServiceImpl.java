@@ -5,67 +5,68 @@ import com.zhinang.iborrow.entity.HomeZone;
 import com.zhinang.iborrow.entity.PageBean;
 import com.zhinang.iborrow.service.HomeZoneService;
 import com.zhinang.iborrow.util.StringUtil;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Service;
 
 @Service("homeZoneService")
 public class HomeZoneServiceImpl implements HomeZoneService {
 
-	@Resource
-	private BaseDao<HomeZone> baseDao;
+    @Resource
+    private BaseDao<HomeZone> baseDao;
 
-	@Override
+    @Override
     public void saveHomeZone(HomeZone homeZone) {
-		baseDao.merge(homeZone);
-	}
+        baseDao.merge(homeZone);
+    }
 
-	@Override
+    @Override
     public void deleteHomeZone(HomeZone homeZone) {
-		baseDao.delete(homeZone);
-	}
+        baseDao.delete(homeZone);
+    }
 
-	@Override
+    @Override
     public List<HomeZone> findHomeZoneList(HomeZone homeZone, PageBean pageBean) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("from HomeZone");
-		if ((homeZone != null) && StringUtil.isNotEmpty(homeZone.getName())) {
-			hql.append(" and name like ?");
-			param.add("%" + homeZone.getName() + "%");
-		}
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("from HomeZone");
+        if ((homeZone != null) && StringUtil.isNotEmpty(homeZone.getName())) {
+            hql.append(" and name like ?");
+            param.add("%" + homeZone.getName() + "%");
+        }
 
-		if (pageBean != null) {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
-		} else {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
-		}
-	}
+        if (pageBean != null) {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
+        } else {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
+        }
+    }
 
-	@Override
+    @Override
     public Long getHomeZoneCount(HomeZone homeZone) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("select count(*) from HomeZone");
-		if ((homeZone != null) && StringUtil.isNotEmpty(homeZone.getName())) {
-			hql.append(" and name like ?");
-			param.add("%" + homeZone.getName() + "%");
-		}
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("select count(*) from HomeZone");
+        if ((homeZone != null) && StringUtil.isNotEmpty(homeZone.getName())) {
+            hql.append(" and name like ?");
+            param.add("%" + homeZone.getName() + "%");
+        }
 
-		return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
-	}
+        return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
+    }
 
-	@Override
+    @Override
     public HomeZone findHomeZoneById(int id) {
-		return baseDao.get(HomeZone.class, id);
-	}
+        return baseDao.get(HomeZone.class, id);
+    }
 
-	@Override
-	public List<HomeZone> findHomeZoneByKeyWord(String keyword) {
-		List<Object> param = new LinkedList<>();
-		StringBuffer hql = new StringBuffer("from HomeZone");
-		hql.append(" where name like ?");
-		param.add("%" + keyword + "%");
+    @Override
+    public List<HomeZone> findHomeZoneByKeyWord(String keyword) {
+        List<Object> param = new LinkedList<>();
+        StringBuffer hql = new StringBuffer("from HomeZone");
+        hql.append(" where name like ?");
+        param.add("%" + keyword + "%");
 
-		return baseDao.find(hql.toString(), param);
-	}
+        return baseDao.find(hql.toString(), param);
+    }
 }

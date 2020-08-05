@@ -4,49 +4,50 @@ import com.zhinang.iborrow.dao.BaseDao;
 import com.zhinang.iborrow.entity.Notification;
 import com.zhinang.iborrow.entity.PageBean;
 import com.zhinang.iborrow.service.NotificationService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Service;
 
 @Service("notificationService")
 public class NotificationServiceImpl implements NotificationService {
 
-	@Resource
-	private BaseDao<Notification> baseDao;
+    @Resource
+    private BaseDao<Notification> baseDao;
 
-	@Override
+    @Override
     public void saveNotification(Notification notification) {
-		baseDao.merge(notification);
-	}
+        baseDao.merge(notification);
+    }
 
-	@Override
+    @Override
     public void deleteNotification(Notification notification) {
-		baseDao.delete(notification);
-	}
+        baseDao.delete(notification);
+    }
 
-	@Override
+    @Override
     public List<Notification> findNotificationList(Notification notification, PageBean pageBean) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("from Notification");
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("from Notification");
 
-		if (pageBean != null) {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
-		} else {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
-		}
-	}
+        if (pageBean != null) {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
+        } else {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
+        }
+    }
 
-	@Override
+    @Override
     public Long getNotificationCount(Notification notification) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("select count(*) from Notification");
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("select count(*) from Notification");
 
-		return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
-	}
+        return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
+    }
 
-	@Override
+    @Override
     public Notification findNotificationById(int id) {
-		return baseDao.get(Notification.class, id);
-	}
+        return baseDao.get(Notification.class, id);
+    }
 }

@@ -10,39 +10,39 @@ import javax.persistence.OneToOne;
 @Table(name = "t_recommend")*/
 public class Recommend {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	
-	//推荐人
-	@OneToOne
-	private User referee;
-	//被推荐人
-	@OneToOne
-	private User recommended;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    //推荐人
+    @OneToOne
+    private User referee;
+    //被推荐人
+    @OneToOne
+    private User recommended;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public User getReferee() {
-		return referee;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setReferee(User referee) {
-		this.referee = referee;
-	}
+    public User getReferee() {
+        return referee;
+    }
 
-	public User getRecommended() {
-		return recommended;
-	}
+    public void setReferee(User referee) {
+        this.referee = referee;
+    }
 
-	public void setRecommended(User recommended) {
-		this.recommended = recommended;
-	}
+    public User getRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(User recommended) {
+        this.recommended = recommended;
+    }
 
 }

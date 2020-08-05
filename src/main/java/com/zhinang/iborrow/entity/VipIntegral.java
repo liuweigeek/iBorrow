@@ -11,35 +11,35 @@ import javax.persistence.Table;
 @Table(name = "t_vip_integral")
 public class VipIntegral {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	//积分标题
-	private String title;
-	//所需积分
-	private Integer integral;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    //积分标题
+    private String title;
+    //所需积分
+    private Integer integral;
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public String getTitle() {
+        return this.title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Integer getIntegral() {
-		return this.integral;
-	}
+    public Integer getIntegral() {
+        return this.integral;
+    }
 
-	public void setIntegral(Integer integral) {
-		this.integral = integral;
-	}
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
 }

@@ -10,14 +10,19 @@ import com.zhinang.iborrow.entity.VipCard;
 import com.zhinang.iborrow.service.PaymentService;
 import com.zhinang.iborrow.service.UserService;
 import com.zhinang.iborrow.service.VipCardService;
-import com.zhinang.iborrow.util.PropertyUtil;
 import com.zhinang.iborrow.util.PageUtil;
+import com.zhinang.iborrow.util.PropertyUtil;
 import com.zhinang.iborrow.util.ResponseUtil;
 import com.zhinang.iborrow.util.StringUtil;
 import com.zhinang.iborrow.util.UserUtil;
-
 import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.stereotype.Controller;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,235 +30,227 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.springframework.stereotype.Controller;
-
 @Controller
 public class VipCardAction extends ActionSupport implements ModelDriven<VipCard>, ServletRequestAware {
-	private static final long serialVersionUID = 1L;
-	private VipCard vipCard = new VipCard();
+    private static final long serialVersionUID = 1L;
+    private VipCard vipCard = new VipCard();
 
-	@Resource
-	private VipCardService vipCardService;
-	@Resource
-	private UserService userService;
-	@Resource
-	private PaymentService paymentService;
-	
-	private String mainPage;
-	
-	private List<VipCard> vipCardList = new ArrayList<VipCard>();
-	
-	private File vipCardBackground;
-	private String vipCardBackgroundFileName;
-	
-	private int vipCardId;
-	private String tradeNum;
-	
-	private int currentPage;
-	private int totalPage;
-	private String pageCode;
-	
-	private HttpServletRequest request;
+    @Resource
+    private VipCardService vipCardService;
+    @Resource
+    private UserService userService;
+    @Resource
+    private PaymentService paymentService;
 
-	@Override
+    private String mainPage;
+
+    private List<VipCard> vipCardList = new ArrayList<VipCard>();
+
+    private File vipCardBackground;
+    private String vipCardBackgroundFileName;
+
+    private int vipCardId;
+    private String tradeNum;
+
+    private int currentPage;
+    private int totalPage;
+    private String pageCode;
+
+    private HttpServletRequest request;
+
+    @Override
     public VipCard getModel() {
-		return this.vipCard;
-	}
+        return this.vipCard;
+    }
 
-	public void setVipCardService(VipCardService vipCardService) {
-		this.vipCardService = vipCardService;
-	}
+    public void setVipCardService(VipCardService vipCardService) {
+        this.vipCardService = vipCardService;
+    }
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-	public void setPaymentService(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
-	public String getMainPage() {
-		return mainPage;
-	}
+    public String getMainPage() {
+        return mainPage;
+    }
 
-	public void setMainPage(String mainPage) {
-		this.mainPage = mainPage;
-	}
+    public void setMainPage(String mainPage) {
+        this.mainPage = mainPage;
+    }
 
-	public List<VipCard> getVipCardList() {
-		return vipCardList;
-	}
+    public List<VipCard> getVipCardList() {
+        return vipCardList;
+    }
 
-	public void setVipCardList(List<VipCard> vipCardList) {
-		this.vipCardList = vipCardList;
-	}
+    public void setVipCardList(List<VipCard> vipCardList) {
+        this.vipCardList = vipCardList;
+    }
 
-	public File getVipCardBackground() {
-		return vipCardBackground;
-	}
+    public File getVipCardBackground() {
+        return vipCardBackground;
+    }
 
-	public void setVipCardBackground(File vipCardBackground) {
-		this.vipCardBackground = vipCardBackground;
-	}
+    public void setVipCardBackground(File vipCardBackground) {
+        this.vipCardBackground = vipCardBackground;
+    }
 
-	public String getVipCardBackgroundFileName() {
-		return vipCardBackgroundFileName;
-	}
+    public String getVipCardBackgroundFileName() {
+        return vipCardBackgroundFileName;
+    }
 
-	public void setVipCardBackgroundFileName(String vipCardBackgroundFileName) {
-		this.vipCardBackgroundFileName = vipCardBackgroundFileName;
-	}
-	
-	public int getVipCardId() {
-		return vipCardId;
-	}
+    public void setVipCardBackgroundFileName(String vipCardBackgroundFileName) {
+        this.vipCardBackgroundFileName = vipCardBackgroundFileName;
+    }
 
-	public void setVipCardId(int vipCardId) {
-		this.vipCardId = vipCardId;
-	}
+    public int getVipCardId() {
+        return vipCardId;
+    }
 
-	public String getTradeNum() {
-		return tradeNum;
-	}
+    public void setVipCardId(int vipCardId) {
+        this.vipCardId = vipCardId;
+    }
 
-	public void setTradeNum(String tradeNum) {
-		this.tradeNum = tradeNum;
-	}
-	
-	public int getCurrentPage() {
-		return currentPage;
-	}
+    public String getTradeNum() {
+        return tradeNum;
+    }
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
+    public void setTradeNum(String tradeNum) {
+        this.tradeNum = tradeNum;
+    }
 
-	public int getTotalPage() {
-		return totalPage;
-	}
+    public int getCurrentPage() {
+        return currentPage;
+    }
 
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 
-	public String getPageCode() {
-		return pageCode;
-	}
+    public int getTotalPage() {
+        return totalPage;
+    }
 
-	public void setPageCode(String pageCode) {
-		this.pageCode = pageCode;
-	}
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
 
-	public String list() throws Exception {
-		int pageSize = Integer.parseInt(PropertyUtil.getPropertyByName2("constant.properties", "adminpagesize"));
-		if (currentPage == 0) {
-			currentPage = 1;
-		}
-		PageBean pageBean = new PageBean(currentPage, pageSize);
-		long count = vipCardService.getVipCardCount(vipCard);
-		totalPage = (int) (count / pageSize);
-		if ((count % pageSize) > 0) {
-			totalPage++;
-		}
-		pageCode = PageUtil.getPagination(request.getContextPath() + "/VipCard_list.action", count, currentPage,
-				pageSize, null);
-		
-		vipCardList = vipCardService.findVipCardList(null, pageBean);
-		mainPage = "vipcard.jsp";
-		return "list";
-	}
+    public String getPageCode() {
+        return pageCode;
+    }
 
-	public String delete() throws Exception {
-		JSONObject result = new JSONObject();
-		VipCard e = vipCardService.findVipCardById(vipCardId);
-		vipCardService.deleteVipCard(e);
-		result.put("success", true);
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return null;
-	}
+    public void setPageCode(String pageCode) {
+        this.pageCode = pageCode;
+    }
 
-	public String deleteList() throws Exception {
-		return null;
-	}
+    public String list() throws Exception {
+        int pageSize = Integer.parseInt(PropertyUtil.getPropertyByName2("constant.properties", "adminpagesize"));
+        if (currentPage == 0) {
+            currentPage = 1;
+        }
+        PageBean pageBean = new PageBean(currentPage, pageSize);
+        long count = vipCardService.getVipCardCount(vipCard);
+        totalPage = (int) (count / pageSize);
+        if ((count % pageSize) > 0) {
+            totalPage++;
+        }
+        pageCode = PageUtil.getPagination(request.getContextPath() + "/VipCard_list.action", count, currentPage,
+                pageSize, null);
 
-	public String save() throws Exception {
-		if (vipCardBackground != null) {
-			String imageName = StringUtil.getRandomString();
-			/*String realPath = ServletActionContext.getServletContext().getRealPath("/images/vipcard");*/
-			String realPath =  Constant.IMG_PATH + "vipcard";
-			String imageFile = imageName + vipCardBackgroundFileName
-					.substring(vipCardBackgroundFileName.lastIndexOf("."), vipCardBackgroundFileName.length());
-			File saveFile = new File(realPath, imageFile);
-			FileUtils.copyFile(vipCardBackground, saveFile);
-			vipCard.setBackground("/iborrow/images/vipcard/" + imageFile);
-		}
+        vipCardList = vipCardService.findVipCardList(null, pageBean);
+        mainPage = "vipcard.jsp";
+        return "list";
+    }
 
-		vipCardService.saveVipCard(vipCard);
-		return "save";
-	}
-	
-	//判断VipId是否已存在注册
-	private boolean vipIdIsExist(String vipId) {
-		return userService.existUserWithVipId(vipId);
-	}
+    public String delete() throws Exception {
+        JSONObject result = new JSONObject();
+        VipCard e = vipCardService.findVipCardById(vipCardId);
+        vipCardService.deleteVipCard(e);
+        result.put("success", true);
+        ResponseUtil.write(ServletActionContext.getResponse(), result);
+        return null;
+    }
 
-	private String createVipId() {
-		String vipId;
-		do {
-			vipId = StringUtil.getRandomStringVipId();
-		} while(vipIdIsExist(vipId));
+    public String deleteList() throws Exception {
+        return null;
+    }
 
-		return vipId;
-	}
-	
-	public String activate() throws Exception {
-		User currentUser = UserUtil.getUserFromSession(request);
+    public String save() throws Exception {
+        if (vipCardBackground != null) {
+            String imageName = StringUtil.getRandomString();
+            /*String realPath = ServletActionContext.getServletContext().getRealPath("/images/vipcard");*/
+            String realPath = Constant.IMG_PATH + "vipcard";
+            String imageFile = imageName + vipCardBackgroundFileName
+                    .substring(vipCardBackgroundFileName.lastIndexOf("."), vipCardBackgroundFileName.length());
+            File saveFile = new File(realPath, imageFile);
+            FileUtils.copyFile(vipCardBackground, saveFile);
+            vipCard.setBackground("/iborrow/images/vipcard/" + imageFile);
+        }
 
-		Payment currentPayment = paymentService.findPaymentByoutTradeNo(tradeNum);
+        vipCardService.saveVipCard(vipCard);
+        return "save";
+    }
 
-		JSONObject result = new JSONObject();
-		if (currentPayment.getFinish()) {
-			//延长会员到期时间
-			VipCard currentCard = vipCardService.findVipCardById(vipCardId);
-			Date openTime = new Date();
-			currentUser.setOpenTime(openTime);
-			Date expireTime = currentUser.getExpirationTime();
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(expireTime);
-			if (System.currentTimeMillis() > calendar.getTimeInMillis()) {
-				calendar.setTimeInMillis(System.currentTimeMillis());
-			}
-			calendar.add(Calendar.DAY_OF_YEAR, currentCard.getDay());
-			currentUser.setExpirationTime(calendar.getTime());
-			if (StringUtil.isEmpty(currentUser.getVipId())) {
-				currentUser.setVipId(createVipId());
-			}
-			userService.saveUser(currentUser);
+    //判断VipId是否已存在注册
+    private boolean vipIdIsExist(String vipId) {
+        return userService.existUserWithVipId(vipId);
+    }
 
-			String endTime = new SimpleDateFormat("yyyy年MM月dd日").format(currentUser.getExpirationTime());
-			result.put("endTime", endTime);
-			result.put("success", true);
-		
-		} else {
-			result.put("success",false);
-		}
-		//判断是否需要填写推荐人
-		if (null == currentUser.getReferee() || null == currentUser.getReferee().getId()) {
-			result.put("isFirst", true);
-		} else {
-			result.put("isFirst", false);
-		}
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return null;
-	}
+    private String createVipId() {
+        String vipId;
+        do {
+            vipId = StringUtil.getRandomStringVipId();
+        } while (vipIdIsExist(vipId));
 
-	//确认会员卡购买结果
+        return vipId;
+    }
+
+    public String activate() throws Exception {
+        User currentUser = UserUtil.getUserFromSession(request);
+
+        Payment currentPayment = paymentService.findPaymentByoutTradeNo(tradeNum);
+
+        JSONObject result = new JSONObject();
+        if (currentPayment.getFinish()) {
+            //延长会员到期时间
+            VipCard currentCard = vipCardService.findVipCardById(vipCardId);
+            Date openTime = new Date();
+            currentUser.setOpenTime(openTime);
+            Date expireTime = currentUser.getExpirationTime();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(expireTime);
+            if (System.currentTimeMillis() > calendar.getTimeInMillis()) {
+                calendar.setTimeInMillis(System.currentTimeMillis());
+            }
+            calendar.add(Calendar.DAY_OF_YEAR, currentCard.getDay());
+            currentUser.setExpirationTime(calendar.getTime());
+            if (StringUtil.isEmpty(currentUser.getVipId())) {
+                currentUser.setVipId(createVipId());
+            }
+            userService.saveUser(currentUser);
+
+            String endTime = new SimpleDateFormat("yyyy年MM月dd日").format(currentUser.getExpirationTime());
+            result.put("endTime", endTime);
+            result.put("success", true);
+
+        } else {
+            result.put("success", false);
+        }
+        //判断是否需要填写推荐人
+        if (null == currentUser.getReferee() || null == currentUser.getReferee().getId()) {
+            result.put("isFirst", true);
+        } else {
+            result.put("isFirst", false);
+        }
+        ResponseUtil.write(ServletActionContext.getResponse(), result);
+        return null;
+    }
+
+    //确认会员卡购买结果
     public String confirmActivate() throws Exception {
         User currentUser = UserUtil.getUserFromSession(request);
         Payment currentPayment = paymentService.findPaymentByoutTradeNo(tradeNum);
@@ -266,11 +263,11 @@ public class VipCardAction extends ActionSupport implements ModelDriven<VipCard>
             result.put("success", true);
 
         } else {
-            result.put("success",false);
+            result.put("success", false);
         }
         //判断是否需要填写推荐人
         if ((null == currentUser.getReferee() || null == currentUser.getReferee().getId())
-				&& StringUtil.isEmpty(currentUser.getVipId())) {
+                && StringUtil.isEmpty(currentUser.getVipId())) {
             result.put("isFirst", true);
         } else {
             result.put("isFirst", false);
@@ -279,13 +276,13 @@ public class VipCardAction extends ActionSupport implements ModelDriven<VipCard>
         return null;
     }
 
-	public String showList() throws Exception {
-		vipCardList = vipCardService.findVipCardList(null, null);
-		return "showList";
-	}
+    public String showList() throws Exception {
+        vipCardList = vipCardService.findVipCardList(null, null);
+        return "showList";
+    }
 
-	@Override
+    @Override
     public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
+        this.request = request;
+    }
 }

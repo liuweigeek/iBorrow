@@ -12,36 +12,36 @@ import javax.persistence.Table;
 @Table(name = "t_vip_level")
 public class VipLevel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	//等级称呼
-	private String title;
-	//积分等级
-	@Column(name = "level")
-	private Integer levelNum;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    //等级称呼
+    private String title;
+    //积分等级
+    @Column(name = "level")
+    private Integer levelNum;
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public String getTitle() {
+        return this.title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Integer getLevelNum() {
-		return this.levelNum;
-	}
+    public Integer getLevelNum() {
+        return this.levelNum;
+    }
 
-	public void setLevelNum(Integer levelNum) {
-		this.levelNum = levelNum;
-	}
+    public void setLevelNum(Integer levelNum) {
+        this.levelNum = levelNum;
+    }
 }

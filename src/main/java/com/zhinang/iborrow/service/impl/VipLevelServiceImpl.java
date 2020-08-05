@@ -4,49 +4,50 @@ import com.zhinang.iborrow.dao.BaseDao;
 import com.zhinang.iborrow.entity.PageBean;
 import com.zhinang.iborrow.entity.VipLevel;
 import com.zhinang.iborrow.service.VipLevelService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Service;
 
 @Service("vipLevelService")
 public class VipLevelServiceImpl implements VipLevelService {
 
-	@Resource
-	private BaseDao<VipLevel> baseDao;
+    @Resource
+    private BaseDao<VipLevel> baseDao;
 
-	@Override
+    @Override
     public void saveVipLevel(VipLevel vipLevel) {
-		baseDao.merge(vipLevel);
-	}
+        baseDao.merge(vipLevel);
+    }
 
-	@Override
+    @Override
     public void deleteVipLevel(VipLevel vipLevel) {
-		baseDao.delete(vipLevel);
-	}
+        baseDao.delete(vipLevel);
+    }
 
-	@Override
+    @Override
     public List<VipLevel> findVipLevelList(VipLevel vipLevel, PageBean pageBean) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("from VipLevel");
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("from VipLevel");
 
-		if (pageBean != null) {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
-		} else {
-			return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
-		}
-	}
+        if (pageBean != null) {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
+        } else {
+            return baseDao.find(hql.toString().replaceFirst("and", "where"), param);
+        }
+    }
 
-	@Override
+    @Override
     public Long getVipLevelCount(VipLevel vipLevel) {
-		List<Object> param = new LinkedList<Object>();
-		StringBuffer hql = new StringBuffer("select count(*) from VipLevel");
+        List<Object> param = new LinkedList<Object>();
+        StringBuffer hql = new StringBuffer("select count(*) from VipLevel");
 
-		return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
-	}
+        return baseDao.count(hql.toString().replaceFirst("and", "where"), param);
+    }
 
-	@Override
+    @Override
     public VipLevel findVipLevelById(int id) {
-		return baseDao.get(VipLevel.class, id);
-	}
+        return baseDao.get(VipLevel.class, id);
+    }
 }

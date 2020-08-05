@@ -12,92 +12,92 @@ import javax.persistence.Table;
 @Table(name = "t_region")
 public class Region {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	//地区编号
-	@Column(name = "region_code")
-	private String regionCode;
-	//地区名称
-	@Column(name = "region_name")
-	private String regionName;
-	//上级地区主键id
-	@Column(name = "parent_id")
-	private Integer parentId;
-	//地区级别
-	@Column(name = "region_level")
-	private Integer regionLevel;
-	
-	@Column(name = "region_order")
-	private Integer regionOrder;
-	//地区英文名
-	@Column(name = "region_name_en")
-	private String regionNameEn;
-	//地区英文简写
-	@Column(name = "region_shortname_en")
-	private String regionShortNameEn;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    //地区编号
+    @Column(name = "region_code")
+    private String regionCode;
+    //地区名称
+    @Column(name = "region_name")
+    private String regionName;
+    //上级地区主键id
+    @Column(name = "parent_id")
+    private Integer parentId;
+    //地区级别
+    @Column(name = "region_level")
+    private Integer regionLevel;
 
-	public Integer getId() {
-		return this.id;
-	}
+    @Column(name = "region_order")
+    private Integer regionOrder;
+    //地区英文名
+    @Column(name = "region_name_en")
+    private String regionNameEn;
+    //地区英文简写
+    @Column(name = "region_shortname_en")
+    private String regionShortNameEn;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public String getRegionCode() {
-		return this.regionCode;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setRegionCode(String regionCode) {
-		this.regionCode = regionCode;
-	}
+    public String getRegionCode() {
+        return this.regionCode;
+    }
 
-	public String getRegionName() {
-		return this.regionName;
-	}
+    public void setRegionCode(String regionCode) {
+        this.regionCode = regionCode;
+    }
 
-	public void setRegionName(String regionName) {
-		this.regionName = regionName;
-	}
+    public String getRegionName() {
+        return this.regionName;
+    }
 
-	public Integer getParentId() {
-		return this.parentId;
-	}
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
+    public Integer getParentId() {
+        return this.parentId;
+    }
 
-	public Integer getRegionLevel() {
-		return this.regionLevel;
-	}
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setRegionLevel(Integer regionLevel) {
-		this.regionLevel = regionLevel;
-	}
+    public Integer getRegionLevel() {
+        return this.regionLevel;
+    }
 
-	public Integer getRegionOrder() {
-		return this.regionOrder;
-	}
+    public void setRegionLevel(Integer regionLevel) {
+        this.regionLevel = regionLevel;
+    }
 
-	public void setRegionOrder(Integer regionOrder) {
-		this.regionOrder = regionOrder;
-	}
+    public Integer getRegionOrder() {
+        return this.regionOrder;
+    }
 
-	public String getRegionNameEn() {
-		return this.regionNameEn;
-	}
+    public void setRegionOrder(Integer regionOrder) {
+        this.regionOrder = regionOrder;
+    }
 
-	public void setRegionNameEn(String regionNameEn) {
-		this.regionNameEn = regionNameEn;
-	}
+    public String getRegionNameEn() {
+        return this.regionNameEn;
+    }
 
-	public String getRegionShortNameEn() {
-		return this.regionShortNameEn;
-	}
+    public void setRegionNameEn(String regionNameEn) {
+        this.regionNameEn = regionNameEn;
+    }
 
-	public void setRegionShortNameEn(String regionShortNameEn) {
-		this.regionShortNameEn = regionShortNameEn;
-	}
+    public String getRegionShortNameEn() {
+        return this.regionShortNameEn;
+    }
+
+    public void setRegionShortNameEn(String regionShortNameEn) {
+        this.regionShortNameEn = regionShortNameEn;
+    }
 }
