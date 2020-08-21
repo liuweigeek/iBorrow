@@ -10,9 +10,9 @@
 
 ### 本地开发运行部署
 - 克隆项目至本地 `git clone https://github.com/liuweigeek/iBorrow.git`
-- 安装MySQL，执行项目目录下的`/environment/iborrow.sql`，将数据导入MySQL中
-- 修改`/src/main/resources/jdbc.properties`中的数据库连接配置
-- 在`/src/main/java/com/zhinang/iborrow/constant/Constant.java#weixin`中，添加自己在微信公众平台申请的AppId、AppSecret等信息
-- 将`/environment/iborrow.conf`的配置，添加至nginx中，转发的Tomcat端口以及文件保存路径，修改为自己的
+- 安装MySQL，执行项目目录下的`environment/iborrow.sql`，将数据导入MySQL中
+- 修改`src/main/resources/jdbc.properties`中的数据库连接配置
+- 在`src/main/java/com/zhinang/iborrow/constant/Constant.java#weixin`中，添加自己在微信公众平台申请的AppId、AppSecret等信息
+- 将`environment/iborrow.conf`的配置，添加至nginx中，转发的Tomcat端口以及文件保存路径，修改为自己的
 - 初始化的示例图片资源，可以在`https://github.com/liuweigeek/iBorrow_images_resource.git`中下载，并添加到自己的本地路径中
 - 后台管理访问地址<http://localhost:80/admin>，默认登录信息为:(手机号:18666666666，密码:12345678)
