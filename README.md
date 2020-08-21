@@ -7,3 +7,10 @@
 
 ### 项目截图
 ![效果图](./images/效果图.png)
+
+### 本地开发运行部署
+- 克隆项目至本地 `git clone https://github.com/liuweigeek/iBorrow.git`
+- 安装MySQL，执行项目目录下的`/environment/iborrow.sql`，将数据导入MySQL中
+- 修改`/src/main/resources/jdbc.properties`中的数据库连接配置
+- 在`/src/main/java/com/zhinang/iborrow/constant/Constant.java#weixin`中，添加自己在微信公众平台申请的AppId、AppSecret等信息
+- 后台管理访问地址http://localhost:80/admin，默认登录信息为:(手机号:18666666666，密码:12345678)
