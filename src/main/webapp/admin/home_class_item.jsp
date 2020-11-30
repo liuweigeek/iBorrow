@@ -190,7 +190,7 @@
 			function deleteHomeClassItem(homeClassItemId){
 				$.post("HomeClassItem_delete.action", {homeClassItemId: homeClassItemId}, 
 					function(result){
-						var result = eval('('+result+')');
+						result = eval('('+result+')');
 						deleteDialog.close();
 						if (result.error) {
 							showMsg(result.error);
